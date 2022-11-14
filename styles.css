@@ -1,0 +1,78 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+    font-family: 'Lexend Deca', sans-serif;
+	height: 100vh;
+	width: 100%;
+}
+
+.note {
+	color: black !important;
+	font-weight: bold;
+}
+
+ul {
+	display: flex;
+	justify-content: space-between;
+	margin: 30px 0px 60px 0px;
+}
+
+li {
+	flex: 1;
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	font-size: 18px;
+	color: black !important;
+}
+
+header  h1 {
+	font-size: 34px;
+}
+
+#main p {
+	font-size: 16px;
+	color: grey;
+	margin-bottom: 13px;
+	line-height: 2rem;
+}
+
+#main h1 {
+	font-size: 74px;
+	margin-top: 3px;
+	margin-bottom: 30px;
+}
+
+#wrapper {
+	width: 60%;
+	margin: auto;
+}
+
+
+#social {
+	background-color: #0087ff;
+	border-radius: 8px;
+	color: white;
+	font-size: 24px;
+	padding: 8px;
+	cursor: pointer;
+}
+
+.connect {
+	margin: 60px 0 40px 0;
+}
+
+
+.footer {
+	margin-top: 60px;
+}
+
+#foot {
+	text-align: center;
+	padding:30px;
+}
