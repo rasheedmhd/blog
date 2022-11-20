@@ -9,8 +9,8 @@ body {
 	width: 100%;
 }
 
-.note {
-	color: black !important;
+.date {
+	color: grey !important;
 	font-weight: bold;
 }
 
