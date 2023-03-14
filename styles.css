@@ -76,3 +76,17 @@ header  h1 {
 	text-align: center;
 	padding:30px;
 }
+
+#code {
+    border-style: dashed;
+    margin: 10px;
+    padding: 10px;
+    background-color: #20292e;
+    color: white;
+}
+
+
+img {
+    margin: auto;
+    width: 90%;
+}
