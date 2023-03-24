@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> Low Level | Rasheed Starlet </title>
+    <link rel="stylesheet" type="text/css" href="../main/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header id="head">
+            <ul>
+                <li><a href="../main/index.html">Home</a></li>
+                <li><a href="../main/blog.html">Blog</a></li>
+                <li><a href="../main/projects.html">Projects</a></li>
+                <li><a href="../main/languages.html">Languages</a></li>
+            </ul>
+        </header>
+
+        <section id="main">
+            <p class="date"> Written on 3rd January, 2023, Published on 12th January, 2023</p>
+
+            <h1> What is an Operating System? </h1>
+            <p>
+                An operating system is any software that runs on kernel mode. The operating system provides an
+                abstraction of the hardware to application programmers and application programs. The OS also manages the
+                resources of the computer, these resources includes printers, mice, keywords, processes which are all
+                part of the modern computer. It usually serves as the software that controls other software on top of it
+                running at user mode.
+            </p>
+
+            <p>
+                Most modern machines have two modes of operation, the <a
+                    href="https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode">Kernel
+                    / Supervisor mode and the User Mode.</a> The OS, which sits right on top of the machine’s hardware
+                interface, runs in the kernel mode. This allows it to execute any instruction that the machine is
+                capable of. All other programs run in the User Mode where some fundamental instructions of the machine
+                are forbidden.
+            </p>
+            <p>
+                I can’t define operating systems without talking about the generations of computers. I will list down
+                the generations below but I will only write about the Operation Systems from the 4th generation of
+                computers as that is the generation of operating system that I intend to build through out these write
+                ups.
+            </p>
+
+            <h2> Generations of Computing Machines </h2>
+            <h3> First Generation ( 1945 - 55 ) - <a href="https://en.wikipedia.org/wiki/Vacuum_tube">Vacuum Tubes</a>
+            </h3>
+            <p>
+                Professor John Atanasoff and Clifford Berry built what is now regarded as the first <a
+                    href="https://en.wikipedia.org/wiki/Atanasoff%E2%80%93Berry_computer">functioning digital
+                    computer.</a> It used 300 vacuum tubes. In this generation of computers, all programming was done in
+                machine language. Machine language is a lower level language than even assembly language. Machine
+                language is peculiar to any given machine. That is, two different computing machines had two different
+                machine languages, and usually, they were not portable. To program any machine, the programmer had to
+                learn its specific machine language.
+            </p>
+            <h3> The Second Generation ( 1955 - 65 ): <a href="https://en.wikipedia.org/wiki/Transistor">Transistors</a>
+                and Batch Systems </h3>
+            <p>
+                The invention of the transistor set in the new wave of computers. Computers could now be manufactured at
+                a comparatively cheaper price. They were slightly more reliable too. They worked for longer periods of
+                time. They were sold mainly to institutions such as businesses, governments, and universities) to help
+                with number crunching. These machines were called mainframes.
+            </p>
+            <h3> The Third Generation ( 1965 - 1980 ): <a
+                    href="https://en.wikipedia.org/wiki/Integrated_circuit">ICs</a> and Multiprogramming </h3>
+            <p>
+                The IBM 360 was the first major computer line to adopt this tech.
+                It was at this generation of computers that Unix was built.
+            </p>
+            <h3> The Fourth Generation Personal Computers ( 1980 - Present ): <a
+                    href="https://en.wikipedia.org/wiki/Personal_computer"> Personal Computers </a> </h3>
+            <p> The microprocessor chip made it possible for individuals to own personal computers. </p>
+            <p>
+                In 1974 Intel built the first <a href="https://en.wikipedia.org/wiki/Intel_8080">general purpose 8-bit
+                    CPU</a> and wanted an operating system. Gary Kildall was contacted to write one. Gary would later
+                take this OS from Intel and create the world’s dominant OS company at the time. Before there was Windows
+                and Macintosh.
+
+            </p>
+            <p>
+                In the early 1980’s IBM designed the IBM PC. They reached out to Gary Kildall considering that he had
+                already written an IOs for the intel 8080, to write the PC’s operating system but <a
+                    href="https://bookjelly.com/the-tragic-story-of-gary-kildall/">failed</a> to make a deal with him.
+                They reached a deal with Bill Gates though, who in turn bought an OS from Tim Paterson and the rest is
+                history.
+                [ This part of the story is very shortened since it is long story on it own. ]
+                I would urge the curious reader to look into the story as I have provided a link above as a start. In
+                2016 after learning about this, I actually added the story to a book that I was writting at the time.
+                The book is lying in a box now 2 rooms away from me as I type this. I hope to publish it one day.
+            </p>
+            <p>
+                You see in the early days operating systems didn’t have fancy graphics, Operations were based on users
+                typing in commands into the computer from a hooked keyboard. More like what we call terminal or CLI or
+                MS DOS in windows. In the 1960s Doug Engelbert, the inventor of the mouse at Stanford Research Institute
+                made a demo later termed the mother of all demos. It launched the <a
+                    href="https://youtu.be/yJDv-zdhzMY">Graphical User Interface</a> era.
+            </p>
+            <p>
+                These ideas were incorporated into OS design by researchers at Xerox PARC where both Steve Jobs and Bill
+                Gates saw their implementations and <a href="https://youtu.be/pQocN_c2uLI">copied</a> them into their
+                respective OSs. The Windows OS and the Apple Macintosh.
+            </p>
+            <h3> <a href="https://en.wikipedia.org/wiki/X86"> x86 </a></h3>
+            <p>
+                The OS I am trying to build is going to be based on the x86 architecture. The x86 architecture refers to
+                all modern processors that are based on the instruction set architecture that started with the intel
+                8086 in the 1970s.
+            </p>
+            <p>
+                There are several such processes that are been manufactured by companies including AMD and Intel, these
+                processes may vary is various aspects, they could be 32-bit or 64-bit but fundamentally they are the
+                same and code that was written based on the x86 decades ago can still work on recent processors.
+            </p>
+            <h3><a href="https://en.wikipedia.org/wiki/GUI">GUI</a></h3>
+            <P>
+                A few paragraphs above,I mentioned that operating systems used not the to have shinny graphics until
+                Doug Engelbert invented the GUI, that said the operating system that I am trying to build doesn’t come
+                with a GUI.Before GUI the most used formed of UI was a Text UI. A Text UI is a User Interface where all
+                the output is in the form of Text. Text UI is easy to implement so I will be implementing one for the
+                OS. Most Operating Systems derived from Unix support a windowing system called the X Window System
+                produced at MIT, this windowing system provides basic window management functions. Usually A full GUI
+                like <a href="https://opensource.com/article/22/6/kde-vs-gnome-linux-desktop">Gnome or KDE</a> can be
+                run on top of the X Window System. Ubuntu uses Gnome and Unity and some Unix Derivatives use KDE. For
+                about 10 years, from 1985 - 1995, Windows was just a GUI on top of MS-DOS.
+            </P>
+            <h3> The Fifth Generation ( 1990 - Present ): Mobile Computers </h3>
+            <ol>
+                <li>1. <a href="https://en.wikipedia.org/wiki/Symbian">Symbian</a></li>
+                <li>2. <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a></li>
+                <li>3. <a href="https://en.wikipedia.org/wiki/iOS">iOS</a></li>
+            </ol>
+            <br />
+            <p>I hope this gives you a better view and understanding of what an OS really is and What I am trying to
+                build. Later write ups will give more details on my progress.</p>
+            <br />
+            <p> Thanks to <a href="https://twitter.com/ejnbo">Yaw</a> for proofreading this piece and suggesting some
+                edits. Really Grateful </p>
+
+
+        </section>
+
+    </div>
+
+    <footer id="foot">
+        <p> Made with love by Rasheed Starlet </p>
+    </footer>
+
+</body>
+
+</html>
