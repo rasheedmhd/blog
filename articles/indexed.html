@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> Rust | Indexed Content </title>
+    <link rel="stylesheet" type="text/css" href="../main/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header id="head">
+            <ul>
+                <li><a href="../main/index.html">Home</a></li>
+                <li><a href="../main/blog.html">Blog</a></li>
+                <li><a href="../main/projects.html">Projects</a></li>
+                <li><a href="../main/languages.html">Languages</a></li>
+            </ul>
+        </header>
+
+        <section id="main">
+            <p class="date"> Published on 25th March, 2023</p>
+
+            <h1> Moves and Indexed Content </h1>
+
+            <p>When a move happens, Rust leaves the moved variable uninitialized: </p>
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=++++let+uninit%3A+String%3B+%2F%2F+an+uninitialized+variable%0A++++let+prize+%3D+String%3A%3Afrom%28%22Nobel+Prize%22%29%3B%0A++++let+hero+%3D+String%3A%3Afrom%28%22Yaw%22%29%3B%0A++++println%21%28%22%7B%7D+was+awarded+a+%7B%7D%22%2C+hero%2C+prize%29%3B%0A%0A++++let+hero+%3D+String%3A%3Afrom%28%22Yaw%22%29%3B%0A++++take_ownership%28hero%29%3B%0A++++println%21%28%22%7B%7D%22%2C+hero%29%3B%0A++++%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6.%0A++++%2F%2F+a+function+that+takes+ownership+of+its+argument%0A++++fn+take_ownership%28arg%3A+String%29+%7B%7D%3B+%2F%2F+arg+is+moved+here+%0A">.
+                </a>
+            </div>
+
+            <p>
+                When we pass the value of <code id="oneline">hero</code> to <code id="oneline">take_ownership()</code>,
+                <code id="oneline">hero</code> becomes uninitialized since its value has
+                been moved. Rust won’t compile because we are printing the value of <code id="oneline">hero</code> after
+                it has been given to
+                <code id="oneline">take_ownership()</code>.
+            </p>
+
+            <p>
+                String data types, willingly give ownership when they are bound to other variables or passed as
+                arguments
+                to functions that aren’t borrowing from them.
+            </p>
+
+            <h3> Scalar Data Types </h3>
+            <p>
+                Other Data types behave differently. Simple Scalar Data types implement the Copy trait. This means Rust
+                will always copy them to the new binding variable or as arguments to other functions.
+            </p>
+
+            <h3> Indexed Content </h3>
+            <p>
+                Unlike Strings and Rust Scalar Data Types, some complex data types are never willing to hand ownership
+                out. They only give ownership when we use special methods that the standard library (`std`) provides. An
+                example is a vector of Strings.
+            </p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+lang+%3D+vec%21%5B%0A%22Go%22.to_string%28%29%2C+%22Rust%22.to_string%28%29%2C+%22OCaml%22.to_string%28%29%2C+%0A%22C%22.to_string%28%29%2C+%22Haskell%22.to_string%28%29%0A%5D%3B%0A++++let+k_and_r+%3D+lang%5B3%5D%3B%0A">.
+                    </>
+            </div>
+
+            <p>When we try compiling we get this error.</p>
+            <code>
+                | let k_and_r = lang[3];
+                | ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_k_and_r`
+                |
+                = note: `#[warn(unused_variables)]` on by default
+
+                error[E0507]: cannot move out of index of `Vec<String>`
+                    --> src/main.rs:73:19
+                    |
+                    | let k_and_r = lang[3];
+                    | ^^^^^^^ move occurs because value has type `String`, which does not implement the `Copy` trait
+                    |
+                    help: consider borrowing here
+                    |
+                    | let k_and_r = &lang[3];
+                    | +
+
+                    For more information about this error, try `rustc --explain E0507`.
+
+            </code>
+
+            <p>
+                When we bind a new variable to a String variable without borrowing, a move happens leaving the source
+                uninitialized. The destination becomes the owner of the variable.
+            </p>
+
+            <p>
+                Using our <code id="oneline">lang</code> vector example, if we bind <code id="oneline">C</code> to <code
+                    id="oneline">k_and_r</code> the <code id="oneline">lang</code> vector would have its index of 3
+                uninitialized. For this to work, a vector must carry with it additional information showing which of its
+                values is initialized and which isn’t.
+            </p>
+
+            <p>
+                This adds more complexity to vectors and Rust, a vector should just be a vector and hence Rust doesn’t
+                allow us to do bindings like these.
+            </p>
+
+            <h3>Borrow?</h3>
+            <p>
+                The easy fix would be to not move the value out of the vector but to simply borrow it. Most cases this
+                will be what you need but in rare cases that you really need to move the value out of a vector, Rust
+                provides us with methods which we will be using below.
+            </p>
+
+            <h3> .pop() </h3>
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++%22Go%22.to_string%28%29%2C+%0A++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++%22C%22.to_string%28%29%2C+%0A++++++++%22Haskell%22.to_string%28%29%0A++++%5D%3B%0A%0A+++%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A++++let+last_lang+%3D+lang.pop%28%29.expect%28%22Vector+have+no+values%22%29%3B%0A++++println%21%28%22last+lang%3A+%7B%7D%22%2C+last_lang%29%3B%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A%7D%0A">
+                </a>
+            </div>
+
+            <p>
+                First we set the <code id="oneline">lang</code> vector to mutable with <code id="oneline">mut</code>
+                Then we use the <code id="oneline">.pop()</code> method, to remove the last element of the vector. This
+                might not be very useful in situations where we want to remove a value that is not the last value of the
+                vector.
+            </p>
+
+            <h3> Using vector’s `swap_remove` method </h3>
+            <p>
+                A vector’s swap_remove, takes an index of the vector and removes the value of its last index and
+                replaces it
+                with the index of the value given to it.
+            </p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++%22Go%22.to_string%28%29%2C+%0A++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++%22C%22.to_string%28%29%2C+%0A++++++++%22Haskell%22.to_string%28%29%0A++++%5D%3B%0A%0A++++let+camel+%3D+lang.swap_remove%282%29%3B%0A++++println%21%28%22last+lang%3A+%7B%7D%22%2C+camel%29%3B%0A++++assert_eq%21%28camel%2C+%22OCaml%22%29%0A%0A%7D%0A">
+                </a>
+            </div>
+            <p>The compiler throws </p>
+            <code id="oneline"> error[E0507]: cannot move out of index of `Vec<Language>`</code>
+
+            <h3>std::mem::replace</h3>
+            <p>
+                We can use <code id="oneline">std::mem::replace</code> to substitute a value at a particular index and
+                replace it with a different value.
+            <p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++%22Go%22.to_string%28%29%2C+%0A++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++%22C%22.to_string%28%29%2C+%0A++++++++%22Haskell%22.to_string%28%29%0A++++%5D%3B++++%0A++++%0A++++let+guidovr+%3D+String%3A%3Afrom%28%22Python%22%29%3B%0A++++%0A++++let+go+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+lang%5B0%5D%2C+guidovr%29%3B%0A+%0A++++assert_eq%21%28go%2C+%22Go%22%29%3B%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A%7D%0A%0A">
+                </a>
+            </div>
+
+            <p>
+                It is important to notice that all of these methods move a value out of the vector but still leave the
+                vector
+                complete. Albeit smaller in some cases.
+            </p>
+
+            <h3>Option &lt;T&gt;
+            </h3>
+            <p>
+                There might be situations where we want to move a value out of its owner that the compiler can’t check,
+                in
+                such a situation we could consider changing the type of the value into a type that can dynamically check
+                whether it has a value or not.
+            </p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%23%5Bderive%28Debug%29%5D%0A++++struct+Language+%7B%0A++++++++creator%3A+Option%3CString%3E%2C%0A++++++++name%3A+String%2C%0A++++%7D%0A++++%0A++++let+mut+languages+%3D+Vec%3A%3Anew%28%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Graydon+Hoare%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Rust%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Rob+Pike%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Go%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0A%0A++++%0A++++let+rusty+%3D+languages%5B1%5D.name%3B+%2F%2F+We+can%E2%80%99t+do+this%0A%7D%0A">
+                </a>
+            </div>
+            <p>
+                Meanwhile we changed the type from String to <code id="oneline">Optiond&ltString&gt</code> To move the
+                value out we would use a method that we used above <code id="oneline">std::mem::replace</code> Since the
+                type is Option<String> it means we can move the value out and replace it with None.
+            </p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+rusty+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+languages%5B0%5D.creator%2C+None%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B+%2F%2F+prints+%60languages%3A+None++%0A%7D++++%0A++++%0A">
+                </a>
+            </div>
+
+            <p>
+                <code id="oneline">std::mem::replace</code> moves the value of <code
+                    id="oneline">languages[0].creator</code> out of its owner and passes ownership to <code
+                    id="oneline">rusty</code>. This practice is very common that there is a method for it.
+            </p>
+
+            <p>We can rewrite the above line more legibly as </p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+rusty+%3D+languages%5B0%5D.name.take%28%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0Aprintln%21%28%22go%3A+%7B%3A%23%3F%7D%22%2C+go%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B1%5D%29%3B%0A">
+                </a>
+            </div>
+            <p>Compiling and running the above prints</p>
+
+            <div id="embedded-code">
+                <a
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+rusty+%3D+languages%5B0%5D.name.take%28%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0Aprintln%21%28%22go%3A+%7B%3A%23%3F%7D%22%2C+go%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B1%5D%29%3B%0A">
+                </a>
+            </div>
+
+            <code>
+                languages: None
+                go: Some(
+                "Rob Pike",
+                )
+                languages: Language {
+                creator: None,
+                name: "Go",
+                }
+            </code>
+
+
+        </section>
+
+        <footer id="foot">
+            <p> Made with love by Rasheed Starlet </p>
+        </footer>
+
+</body>
+
+</html>
