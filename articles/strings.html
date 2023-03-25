@@ -21,63 +21,65 @@
         </header>
 
         <section id="main">
-            <p class="date">14th March, 2023 - 1:00PM</p>
+            <p class="date">14th March, 2023 - 1:00 PM</p>
             <h1>
-                Understanding Moves through Rust String data type Representation
+                Understanding Moves through Rust String data type Representation.
             </h1>
 
             <p>
-                I was reading the rust programming language book, in Chapter 3 - Ownership
-                The first part of that chapter talks about Understanding ownership by using the String data type.
+                I was reading The Rust Programming Language Book, on Chapter 3, titled, Ownership.
+                The first part of that chapter talks about understanding Ownership by using the String data type.
             </p>
 
             <p>
-                This writeup is not about teaching you ownership and moves, It is about understanding how rust
-                represents complex data structures in memory. This article is supposed to be used as a companion to rust
-                book on the chapter mentioned above.
+                This writeup is not about teaching you Ownership and Moves. I hope that it gives you an understanding of
+                how Rust
+                represents complex data structures in memory. This article is supposed to be used as a companion to Rust
+                Book on the chapter that teaches Ownership.
             </p>
 
             <p>
-                What led to me writing this article is that, I realized that the rust book drawings of how rust
-                represents Strings in memory wasn't clear enough. I took to excalidraw to draw the diagrams in a more
-                understandable way with intentions of showing it on wednesday during our devcongress rust study group
-                meeting. When I was done with the drawing, I realized that Understanding how rust stores Strings in
+                What led me to writing this article is that, I realized that the Rust Book drawings of how Rust
+                represent Strings in memory wasn't clear enough. I took to excalidraw to draw the diagrams in a more
+                understandable way with intentions of showing it on Wednesday during our DevCongress Rust Study Group
+                meeting. When I was done with the drawing, I realized that understanding how Rust store Strings in
                 memory and the need to prevent double frees, gives one an intuitive understanding of Rust move
-                semantics. So I set out to write this using my diagrams to explain instead of what the rust book does
+                semantics. So I set out to write this using my diagrams to explain instead of using The Rust Book's
+                drawings
                 with hopes that Ownership, Rust Strings and Moves will click for you and you will never have to worry
-                about them again. Just hoping, no promises.
+                about them again. Just hopes, no promises.
             </p>
 
             <h2>The 3 cardinal Ownership rules</h2>
             <p>
-                1. Each Value has an owner.
-                2. Each Value must have only one owner.
-                3. When the owner of a value goes out of scope, the value is dropped.
+                1. Each Value has an Owner.
+                2. Each Value must have only one Owner.
+                3. When the owner of a value goes out of Scope, the value is dropped.
             </p>
 
             <p>
-                These are the rules that powers the rust advanced type system. These rules might be simple and easy to
-                memorize but understanding the rules and how they provide rust with memory safety is very important to
-                understanding rust.
+                These are the rules that power Rust's advanced type system. These rules might be simple and easy to
+                memorize but understanding the rules and how they provide Rust with memory safety is very important to
+                understanding Rust.
             </p>
 
             <h2> The Borrow Checker </h2>
 
             <p>
-                Sure you must have heard of the borrow-checker and how rust has a steep learning curve.
-                The borrow checker will fight you, you will have a lot of compilation issues but once you are able to
+                Sure you must have heard of the Borrow-Checker and how Rust has a steep learning curve.
+                The Borrow-Checker will fight you, you will have a lot of compilation issues but once you are able to
                 fix the issues and your code compiles, Rust guarantees you that the program will always run without
-                memory safety bugs. So the borrow-checker gives you upfront pain for more peace during runtime.
+                memory safety bugs. So the Borrow-Checker gives you upfront pain for more peace during runtime.
             </p>
 
             <h2> Stack vs Heap </h2>
             <p>
-                There are a lot of resources that try to explain stacks and heaps, a good example is the rust book,
+                There are a lot of resources that try to explain Stacks and Heaps, a good example is The Rust Book,
                 which I would advise that you read it, if you haven't read it already.
             </p>
 
             <p>
-                I am only going to state a few properties of stacks and heaps that are relevant in explaining how rust
+                I am only going to state a few properties of Stacks and Heaps that are relevant in explaining how Rust
                 manages memory for us without Garbage Collection while guaranteeing memory safety.
             </p>
 
@@ -86,42 +88,42 @@
             <p>
                 The Stack is a Last-in First-out data structure. This means that when you put data into the stack, You
                 put each data block on top of the prior stacked block, think of packing plates, the ideal way to remove
-                the plates is to start removing from the top. You add data to the stack through a process called push
-                and you remove data from the stack through a process called pop.
+                the plates is to start removing from the top. You add data to the Stack through a process called push
+                and you remove data from the Stack through a process called pop.
             </p>
 
             <p>
-                In rust, All data that is stored on the stack is fixed and can be determined during compile time. This
-                is very important. In Rust, function arguments, including pointers to data allocated on the heap and the
+                In Rust, all data that is stored on the Stack is fixed and can be determined during compile time. This
+                is very important. In Rust, function arguments, pointers to data allocated on the Heap and the
                 function's own local variables are stored on the stack.
             </p>
 
             <h2> Heap </h2>
 
             <p>
-                The heap is a growable data structure. When you want to store data into the heap, you ask the memory
+                The Heap is a growable data structure. When you want to store data on the Heap, you ask the memory
                 allocator to allocate a space of memory for you, and it finds a memory space large enough to hold your
-                data and marks it as being in use and returns a pointer to the memory. The heap is slower than the stack
+                data and marks it as being in use and returns a pointer to the memory. The Heap is slower than the Stack
                 because we have to first allocate enough memory, dynamically grow it and also look up data when we need
                 it using a pointer.
             </p>
 
             <h2> The String Rust Data Type </h2>
             <p>
-                Is a growable, mutable, owned, utf-8 encoded data type, known as a complex data type in rust. Does the
-                growable give you a hint on where it will be stored? hip hip hurra.....
+                Is a growable, mutable, owned, UTF-8 Encoded data type, known as a complex data type in Rust. Does the
+                growable give you a hint on where it will be stored? Heap Heap Hurra.....
             </p>
 
             <p>
                 Rust has two types of strings, str, known as a string slice, its size is easily determined at compile
                 time by just looking at it. It is stored in the program's binary.
                 There is another String data type implemented in the std lib. It has an implementation that allows the
-                rust compiler to drop it when its owner goes out of scope, freeing memory. This is in contrast to other
+                Rust Compiler to drop it when its owner goes out of Scope, freeing memory. This is in contrast to other
                 languages like Go that has a Garbage collector to free memory that is no longer in use and C that allows
                 the programmer to manually allocate and free memory. Both of which have downsides.
             </p>
 
-            <h2> A rust String data type is made up of 3 sections. </h2>
+            <h2> A Rust String data type is made up of 3 sections. </h2>
 
             <p>
                 1. A pointer to the memory allocated for the string to store its data
@@ -165,8 +167,8 @@
 
             <p>
                 Suffice to say, when it comes to String, Rust divides it into 2, Storing the metadata of the String on
-                the stack and the value of the String itself in the heap. This way, we can store the metadata which is
-                fixed at compile time on the stack and the value of the String, which can be dynamically resized during
+                the Stack and the value of the String itself in the heap. This way, we can store the metadata which is
+                fixed at compile time on the Stack and the value of the String, which can be dynamically resized during
                 runtime is then stored on the heap.
             </p>
 
@@ -181,9 +183,9 @@
             </p>
 
             <p>
-                You can see ... written below the stack, heap texts on both diagrams, and also at the bottom of the
-                heap. They show the directions that more memory can be allocated. In the stack diagram it shows that
-                data can only be added from the above. And in the heap since memory is allocated randomly, we assume
+                You can see ... written below the Stack, Heap texts on both diagrams, and also at the bottom of the
+                Heap. They show the directions that more memory can be allocated. In the Stack diagram it shows that
+                data can only be added from the above. And in the Heap since memory is allocated randomly, we assume
                 that data can be added from above or below, since the space that the value of our variable occupies was
                 allocated randomly.
             </p>
@@ -202,7 +204,7 @@
             </div>
 
             <p>
-                if you compiled this it would run without issues, this works because Rust scalar data types are
+                If you compiled this it would run without issues, this works because Rust Scalar data types are
                 lightweight, they are fixed sized and don't consume a lot of memory storage. They have a Copy trait
                 implementation that allows them to be copied from one variable to the other without any performance
                 hits.
@@ -228,11 +230,14 @@
 
             <p>
                 What Rust does above is that, instead of copying the whole String, it copies only the part of the string
-                stored on the stack ( the pointer, the length and the capacity ).
+                stored on the Stack ( the pointer, the length and the capacity ).
             </p>
 
             <p>
-                So now, both ‘comm’ and ‘group’, stores the same data. They point to the same memory location. Which
+                So now, both <code id="oneline">comm</code> and <code id="oneline">group</code>, stores the same data.
+                They
+                point to the same
+                memory location. Which
                 means they both now own the same value stored on the heap. This violates Ownership rules #2 as stated
                 above.
             </p>
@@ -240,20 +245,25 @@
             <h2> Enter Move! </h2>
 
             <p>
-                We already violated Ownership rules #2 above, which states that, Each Value must have only one owner.
-                Why not violate, #3 while we can? Which also states that, When the owner of a value goes out of scope,
+                We already violated Ownership rule #2 above, which states that, Each value must have only one Owner.
+                Why not violate, #3 while we can? Which also states that, When the Owner of a value goes out of Scope,
                 the value is dropped. What happens if our program transitions from the scope of comm and group? comm and
-                group should be dropped, as per Ownership rules #3. But now we have 2 variables pointing to the same
-                memory. If Rust tried dropping group and comm, By the time it tried to drop comm, group would have been
+                group should be dropped, as per Ownership rule #3. But now we have 2 variables pointing to the same
+                memory. If Rust tried dropping group and <code id="oneline">comm</code>, By the time it tried to drop
+                <code id="oneline">comm</code>, <code id="oneline">groud</code> would have been
                 dropped already leaving us with what we call double-frees. Double free is definitely a memory bug and as
                 Graydon Hoare states, [Memory] Safety is <a href="https://graydon2.dreamwidth.org/247406.html">Rust's
                     raison d'etre</a>; we need to find a way to solve this problem.
             </p>
 
             <p>
-                How does Rust manage double free errors, in this situation? Move. When we bound ‘group’ to comm, Rust
-                made sure to drop ‘comm’, Making ‘group’ the only owner of the data stored in the heap. In this way,
-                When ‘group’ is dropped later on, there aren't any issues because ‘group’ is the only owner of "Rust
+                How does Rust manage double free errors, in this situation? Move. When we bound <code
+                    id="oneline">groud</code> to <code id="oneline">comm</code>, Rust
+                made sure to drop <code id="oneline">comm</code>, Making <code id="oneline">group</code> the only owner
+                of the
+                data stored in the heap. In this way,
+                When <code id="oneline">group</code> is dropped later on, there aren't any issues because <code
+                    id="oneline">group</code> is the only owner of "Rust
                 Study Group".
             </p>
 
@@ -262,6 +272,23 @@
                 move becomes a design consequence of having memory safety, not a new feature that we need to learn.
             </p>
 
+            </hr>
+            <section>
+
+                <h3> Foot Note: DevCongress </h3>
+                <p><a href="http://www.devcongress.org/">DevCongress</a> DevCongress is a developers' movement aimed at
+                    becoming the most vibrant across the software developers space in Ghana and Africa. The objectives
+                    are very simple.
+                </p>
+
+                <p> <a href="http://slack.devcongress.org/"> Join us on Slack </a></p>
+
+                <h3> Foot Note: Rust Study Group </h3>
+                <p> The Rust Study Group is a group of Rust enthusiast DevCongress members who study The Rust
+                    Programming Language Book and meet weekly on Wednesdays to discuss and teach. I am the Group Lead.
+                <p>
+
+            </section>
 
         </section>
 

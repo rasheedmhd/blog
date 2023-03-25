@@ -82,8 +82,17 @@ header  h1 {
     border-style: dashed;
     margin: 10px;
     padding: 10px;
-    background-color: #20292e;
-    color: white;
+    background-color: #eff3f3;
+    color: #FF9E56;
+}
+
+
+#oneline {
+    margin: 4px;
+    padding: 4px;
+    border-radius: 3px;
+    background-color: #eff3f3;
+    color: #FF9E56;
 }
 
 
