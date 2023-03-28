@@ -36,8 +36,14 @@ header  h1 {
 	font-size: 34px;
 }
 
+#rust-pg-link {
+    font-size: 14px;
+    color: grey;
+}
+
 #main p {
-	font-size: 16px;
+    font-family: 'Work Sans', sans-serif;
+	font-size: 18px;
 	color: grey;
 	margin-bottom: 13px;
 	line-height: 2rem;
@@ -88,9 +94,10 @@ header  h1 {
 
 
 #oneline {
+    font-size: 16px;
     margin: 4px;
     padding: 4px;
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: #eff3f3;
     color: #FF9E56;
 }

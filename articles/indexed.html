@@ -6,6 +6,10 @@
     <title> Rust | Indexed Content </title>
     <link rel="stylesheet" type="text/css" href="../main/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Work+Sans:wght@400&display=swap"
+        rel="stylesheet">
     <script src="main.js"></script>
 </head>
 
@@ -13,7 +17,7 @@
     <div id="wrapper">
         <header id="head">
             <ul>
-                <li><a href="../main/index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="../main/blog.html">Blog</a></li>
                 <li><a href="../main/projects.html">Projects</a></li>
                 <li><a href="../main/languages.html">Languages</a></li>
@@ -27,10 +31,13 @@
 
             <p>When a move happens, Rust leaves the moved variable uninitialized: </p>
             <div id="embedded-code">
+                <script src="https://gist.github.com/rust-play/d97818a501a8b92c4ed0db3298a8ee7e.js"></script>
                 <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=++++let+uninit%3A+String%3B+%2F%2F+an+uninitialized+variable%0A++++let+prize+%3D+String%3A%3Afrom%28%22Nobel+Prize%22%29%3B%0A++++let+hero+%3D+String%3A%3Afrom%28%22Yaw%22%29%3B%0A++++println%21%28%22%7B%7D+was+awarded+a+%7B%7D%22%2C+hero%2C+prize%29%3B%0A%0A++++let+hero+%3D+String%3A%3Afrom%28%22Yaw%22%29%3B%0A++++take_ownership%28hero%29%3B%0A++++println%21%28%22%7B%7D%22%2C+hero%29%3B%0A++++%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6.%0A++++%2F%2F+a+function+that+takes+ownership+of+its+argument%0A++++fn+take_ownership%28arg%3A+String%29+%7B%7D%3B+%2F%2F+arg+is+moved+here+%0A">.
+                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=%23%5Ballow%28unused_variables%29%5D%0A%0Afn+main%28%29+%7B%0A%0A++++let+uninit%3A+String%3B+%2F%2F+an+uninitialized+variable%0A++++let+prize+%3D+String%3A%3Afrom%28%22Nobel+Prize%22%29%3B%0A++++let+hero+%3D+String%3A%3Afrom%28%22Yaw%22%29%3B%0A++++println%21%28%22%7B%7D+was+awarded+a+%7B%7D%22%2C+hero%2C+prize%29%3B%0A%0A++++take_ownership%28hero%29%3B%0A++++println%21%28%22%7B%7D%22%2C+hero%29%3B%0A++++%0A++++%2F%2F+%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%E2%80%A6%0A++++%2F%2F+a+function+that+takes+ownership+of+its+argument%0A++++fn+take_ownership%28arg%3A+String%29+%7B%7D+%2F%2F+arg+is+moved+here+%0A%0A%7D%0A">
+                    <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
+            <br />
 
             <p>
                 When we pass the value of <code id="oneline">hero</code> to <code id="oneline">take_ownership()</code>,
@@ -47,12 +54,14 @@
             </p>
 
             <h3> Scalar Data Types </h3>
+
             <p>
                 Other Data types behave differently. Simple Scalar Data types implement the Copy trait. This means Rust
                 will always copy them to the new binding variable or as arguments to other functions.
             </p>
 
             <h3> Indexed Content </h3>
+            <!-- <script src="https://gist.github.com/rust-play/430819fbea9865d8fbc7e5ddfd2f05f0.js"></script> -->
             <p>
                 Unlike Strings and Rust Scalar Data Types, some complex data types are never willing to hand ownership
                 out. They only give ownership when we use special methods that the standard library (`std`) provides. An
@@ -60,32 +69,14 @@
             </p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+lang+%3D+vec%21%5B%0A%22Go%22.to_string%28%29%2C+%22Rust%22.to_string%28%29%2C+%22OCaml%22.to_string%28%29%2C+%0A%22C%22.to_string%28%29%2C+%22Haskell%22.to_string%28%29%0A%5D%3B%0A++++let+k_and_r+%3D+lang%5B3%5D%3B%0A">.
-                    </>
+                <script src="https://gist.github.com/rust-play/278ab3e8a9f7e9a9a5ae01ba0078d05c.js"></script>
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++let+lang+%3D+vec%21%5B%0A++++++++++++%22Go%22.to_string%28%29%2C+%0A++++++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++++++%22C%22.to_string%28%29%2C+%0A++++++++++++%22Haskell%22.to_string%28%29%0A++++++++%5D%3B%0A%0A%0A++++let+k_and_r+%3D+lang%5B3%5D%3B%0A%7D">
+                    <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
+                </a>
             </div>
+            <br />
 
-            <p>When we try compiling we get this error.</p>
-            <code>
-                | let k_and_r = lang[3];
-                | ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_k_and_r`
-                |
-                = note: `#[warn(unused_variables)]` on by default
-
-                error[E0507]: cannot move out of index of `Vec<String>`
-                    --> src/main.rs:73:19
-                    |
-                    | let k_and_r = lang[3];
-                    | ^^^^^^^ move occurs because value has type `String`, which does not implement the `Copy` trait
-                    |
-                    help: consider borrowing here
-                    |
-                    | let k_and_r = &lang[3];
-                    | +
-
-                    For more information about this error, try `rustc --explain E0507`.
-
-            </code>
+            <p>When we try compiling we get this error. <code id="oneline">error[E0507]: cannot move out of index of `Vec<String>`</code> </p>
 
             <p>
                 When we bind a new variable to a String variable without borrowing, a move happens leaving the source
@@ -96,7 +87,7 @@
                 Using our <code id="oneline">lang</code> vector example, if we bind <code id="oneline">C</code> to <code
                     id="oneline">k_and_r</code> the <code id="oneline">lang</code> vector would have its index of 3
                 uninitialized. For this to work, a vector must carry with it additional information showing which of its
-                values is initialized and which isn’t.
+                values are initialized and which aren't.
             </p>
 
             <p>
@@ -112,11 +103,14 @@
             </p>
 
             <h3> .pop() </h3>
+            <br />
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++%22Go%22.to_string%28%29%2C+%0A++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++%22C%22.to_string%28%29%2C+%0A++++++++%22Haskell%22.to_string%28%29%0A++++%5D%3B%0A%0A+++%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A++++let+last_lang+%3D+lang.pop%28%29.expect%28%22Vector+have+no+values%22%29%3B%0A++++println%21%28%22last+lang%3A+%7B%7D%22%2C+last_lang%29%3B%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A%7D%0A">
+            <script src="https://gist.github.com/rust-play/7739a0db84c1b3db8c9cd7d4b38fbc0d.js"></script>
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++++++%22Go%22.to_string%28%29%2C+%0A++++++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++++++%22C%22.to_string%28%29%2C+%0A++++++++++++%22Haskell%22.to_string%28%29%0A++++++++%5D%3B%0A%0A+++%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A++++let+last_lang+%3D+lang.pop%28%29.expect%28%22Vector+have+no+values%22%29%3B%0A++++println%21%28%22last+lang%3A+%7B%7D%22%2C+last_lang%29%3B%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A%0A%7D">
+                <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
+            <br />
 
             <p>
                 First we set the <code id="oneline">lang</code> vector to mutable with <code id="oneline">mut</code>
@@ -125,7 +119,7 @@
                 vector.
             </p>
 
-            <h3> Using vector’s `swap_remove` method </h3>
+            <h3> Using vector’s <code id="oneline">swap_remove</code> method </h3>
             <p>
                 A vector’s swap_remove, takes an index of the vector and removes the value of its last index and
                 replaces it
@@ -133,12 +127,12 @@
             </p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++%22Go%22.to_string%28%29%2C+%0A++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++%22C%22.to_string%28%29%2C+%0A++++++++%22Haskell%22.to_string%28%29%0A++++%5D%3B%0A%0A++++let+camel+%3D+lang.swap_remove%282%29%3B%0A++++println%21%28%22last+lang%3A+%7B%7D%22%2C+camel%29%3B%0A++++assert_eq%21%28camel%2C+%22OCaml%22%29%0A%0A%7D%0A">
+            <script src="https://gist.github.com/rust-play/6aa034b284f07440283e97091022000c.js"></script>
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++++++%22Go%22.to_string%28%29%2C+%0A++++++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++++++%22C%22.to_string%28%29%2C+%0A++++++++++++%22Haskell%22.to_string%28%29%0A++++++++%5D%3B%0A%0A++++let+camel+%3D+lang.swap_remove%282%29%3B%0A++++println%21%28%22removed+lang%3A+%7B%7D%22%2C+camel%29%3B%0A++++assert_eq%21%28camel%2C+%22OCaml%22%29%3B%0A++++println%21%28%22last+lang%3A+%7B%3A%3F%7D%22%2C+lang%29%3B%0A%0A%7D">
+                <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
-            <p>The compiler throws </p>
-            <code id="oneline"> error[E0507]: cannot move out of index of `Vec<Language>`</code>
+            <br />
 
             <h3>std::mem::replace</h3>
             <p>
@@ -147,10 +141,12 @@
             <p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++%22Go%22.to_string%28%29%2C+%0A++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++%22C%22.to_string%28%29%2C+%0A++++++++%22Haskell%22.to_string%28%29%0A++++%5D%3B++++%0A++++%0A++++let+guidovr+%3D+String%3A%3Afrom%28%22Python%22%29%3B%0A++++%0A++++let+go+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+lang%5B0%5D%2C+guidovr%29%3B%0A+%0A++++assert_eq%21%28go%2C+%22Go%22%29%3B%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A%7D%0A%0A">
+            <script src="https://gist.github.com/rust-play/3beb851273d489f128301be26dc8d59b.js"></script>
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++let+mut+lang+%3D+vec%21%5B%0A++++++++++++%22Go%22.to_string%28%29%2C+%0A++++++++++++%22Rust%22.to_string%28%29%2C+%0A++++++++++++%22OCaml%22.to_string%28%29%2C+%0A++++++++++++%22C%22.to_string%28%29%2C+%0A++++++++++++%22Haskell%22.to_string%28%29%0A++++++++%5D%3B%0A%0A++++let+guidovr+%3D+String%3A%3Afrom%28%22Python%22%29%3B%0A++++let+go+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+lang%5B0%5D%2C+guidovr%29%3B%0A+%0A++++assert_eq%21%28go%2C+%22Go%22%29%3B%0A++++println%21%28%22lang%3A+%7B%3A%23%3F%7D%22%2C+lang%29%3B%0A%0A%7D">
+                <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
+            <br />
 
             <p>
                 It is important to notice that all of these methods move a value out of the vector but still leave the
@@ -158,7 +154,7 @@
                 complete. Albeit smaller in some cases.
             </p>
 
-            <h3>Option &lt;T&gt;
+            <h3>Option&lt;T&gt;
             </h3>
             <p>
                 There might be situations where we want to move a value out of its owner that the compiler can’t check,
@@ -168,21 +164,25 @@
             </p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%23%5Bderive%28Debug%29%5D%0A++++struct+Language+%7B%0A++++++++creator%3A+Option%3CString%3E%2C%0A++++++++name%3A+String%2C%0A++++%7D%0A++++%0A++++let+mut+languages+%3D+Vec%3A%3Anew%28%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Graydon+Hoare%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Rust%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Rob+Pike%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Go%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0A%0A++++%0A++++let+rusty+%3D+languages%5B1%5D.name%3B+%2F%2F+We+can%E2%80%99t+do+this%0A%7D%0A">
+            <script src="https://gist.github.com/rust-play/462b55791f149421dab78d8c62ff05ce.js"></script>
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=%23%5Ballow%28unused_variables%29%5D%0A%0Afn+main%28%29+%7B%0A++++%23%5Bderive%28Debug%29%5D%0A++++struct+Language+%7B%0A++++++++creator%3A+Option%3CString%3E%2C%0A++++++++name%3A+String%2C%0A++++%7D%0A++++%0A++++let+mut+languages+%3D+Vec%3A%3Anew%28%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Graydon+Hoare%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Rust%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Rob+Pike%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Go%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0A%0A++++%0A++++let+rusty+%3D+languages%5B1%5D.creator%3B+%2F%2F+We+can%E2%80%99t+do+this%0A%7D%0A">
+                <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
+            <br />
+
+            <p>The compiler throws <code id="oneline"> error[E0507]: cannot move out of index of Vec&lt;Language&gt;</code> </p>
             <p>
-                Meanwhile we changed the type from String to <code id="oneline">Optiond&ltString&gt</code> To move the
-                value out we would use a method that we used above <code id="oneline">std::mem::replace</code> Since the
-                type is Option<String> it means we can move the value out and replace it with None.
+                In line 6 of the code snippet above, we used <code id="oneline">Option&ltString&gt</code> instead of String yet we                    failed to move the value out. To move the value out we can use the <code id="oneline">std::mem::replace</code> method                 demonstrated above. With type <code id="oneline">Option&lt;String&gt;</code>, we can move the value out and replace it                with <code id="oneline">None</code>. Since an <code id="oneline">Option&lt;String&gt;</code> is an enum that has                   two variants of <code id="oneline">Some()</code> and <code id="oneline">None</code>.
             </p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+rusty+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+languages%5B0%5D.creator%2C+None%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B+%2F%2F+prints+%60languages%3A+None++%0A%7D++++%0A++++%0A">
+            <script src="https://gist.github.com/rust-play/5b69387ba3d5097f28416cf0257639e8.js"></script>
+            <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%23%5Bderive%28Debug%29%5D%0A++++struct+Language+%7B%0A++++++++creator%3A+Option%3CString%3E%2C%0A++++++++name%3A+String%2C%0A++++%7D%0A++++%0A++++let+mut+languages+%3D+Vec%3A%3Anew%28%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Graydon+Hoare%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Rust%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Rob+Pike%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Go%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0A%0A%0A%0A++++%2F%2Flet+rusty+%3D+languages%5B1%5D.name%3B+%2F%2F+We+can%E2%80%99t+do+this%0A++++%0A++++let+rusty+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+languages%5B0%5D.creator%2C+None%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B+%2F%2F+prints+%60languages%3A+None%0A%7D%0A">
+                <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
+            <br />
 
             <p>
                 <code id="oneline">std::mem::replace</code> moves the value of <code
@@ -193,29 +193,20 @@
             <p>We can rewrite the above line more legibly as </p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+rusty+%3D+languages%5B0%5D.name.take%28%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0Aprintln%21%28%22go%3A+%7B%3A%23%3F%7D%22%2C+go%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B1%5D%29%3B%0A">
+            <script src="https://gist.github.com/rust-play/d55b6fef51188410e8ef8f005c72f4da.js"></script>
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%23%5Bderive%28Debug%29%5D%0A++++struct+Language+%7B%0A++++++++creator%3A+Option%3CString%3E%2C%0A++++++++name%3A+String%2C%0A++++%7D%0A++++%0A++++let+mut+languages+%3D+Vec%3A%3Anew%28%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Graydon+Hoare%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Rust%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++%0A++++languages.push%28Language+%7B%0A++++++++creator%3A+Some%28%22Rob+Pike%22.to_string%28%29%29%2C%0A++++++++name%3A+%22Go%22.to_string%28%29%2C%0A++++%7D%29%3B%0A++++%2F%2Fprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0A%0A%0A%0A++++%2F%2F+let+rusty+%3D+languages%5B1%5D.name%3B+%2F%2F+We+can%E2%80%99t+do+this%0A++++%0A++++%2F%2F+let+rusty+%3D+std%3A%3Amem%3A%3Areplace%28%26mut+languages%5B0%5D.creator%2C+None%29%3B%0A++++%2F%2F+println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B+%2F%2F+prints+%60languages%3A+None%0A++++let+rusty+%3D+languages%5B0%5D.creator.take%28%29%3B%0A++++let+go+%3D+languages%5B1%5D.creator.take%28%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0A++++println%21%28%22go%3A+%7B%3A%23%3F%7D%22%2C+go%29%3B%0A++++println%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B1%5D%29%3B%0A++++%0A++++%2F%2F+Clicking+on+the+link+below+will+show+you+the+full+code%0A%7D%0A">
+                <span id="rust-pg-link"> Click here to run the above code with Rust Playground. </span>
                 </a>
             </div>
+            <br />
             <p>Compiling and running the above prints</p>
 
             <div id="embedded-code">
-                <a
-                    href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+rusty+%3D+languages%5B0%5D.name.take%28%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0Aprintln%21%28%22go%3A+%7B%3A%23%3F%7D%22%2C+go%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B1%5D%29%3B%0A">
+                <a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=let+rusty+%3D+languages%5B0%5D.name.take%28%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B0%5D.creator%29%3B%0Aprintln%21%28%22go%3A+%7B%3A%23%3F%7D%22%2C+go%29%3B%0Aprintln%21%28%22languages%3A+%7B%3A%23%3F%7D%22%2C+languages%5B1%5D%29%3B%0A">
                 </a>
             </div>
 
-            <code>
-                languages: None
-                go: Some(
-                "Rob Pike",
-                )
-                languages: Language {
-                creator: None,
-                name: "Go",
-                }
-            </code>
-
+            <script src="https://gist.github.com/rust-play/4cbe4517c9f665705ce6316a998ac52c.js"></script>
 
         </section>
 
