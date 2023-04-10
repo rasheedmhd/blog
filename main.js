@@ -1,8 +1,8 @@
 window.addEventListener('load', () => {
     const social = document.querySelector('.footer');
-    const button = document.querySelector('#social')
+    const button = document.getElementById('social')
     social.style.display = 'none';
-    button.addEventListener('click', () => {
-        social.style.dispay = true;
+    button.addEventListener('onclick', () => {
+        social.style.dispay = 'list';
     })
-})
+});
