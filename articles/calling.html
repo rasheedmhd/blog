@@ -1,87 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <title> Calling Conventions | Rasheed Starlet </title>
-    <link rel="stylesheet" type="text/css" href="../main/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <title>Calling Conventions | Rasheed Starlet</title>
+    <link rel="stylesheet" type="text/css" href="../main/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap"
+      rel="stylesheet"
+    />
     <script src="main.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="wrapper">
-        <header id="head">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../main/blog.html">Blog</a></li>
-                <li><a href="../main/projects.html">Projects</a></li>
-                <li><a href="../main/languages.html">Languages</a></li>
-            </ul>
-        </header>
+      <header id="head">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../main/blog.html">Blog</a></li>
+          <li><a href="../main/projects.html">Projects</a></li>
+          <li><a href="../main/languages.html">Languages</a></li>
+        </ul>
+      </header>
 
-        <section id="main">
-            <p class="date">10th April, 2023</p>
+      <section id="main">
+        <p class="date">10th April, 2023</p>
 
-            <h1> Calling Conventions - The why and the Need </h1>
+        <h1>Calling Conventions - The why and the Need</h1>
 
-            <h3>Calling Conventions</h3>
+        <h3>Functions, Procedures and Methods</h3>
+        <p>
+          ﻿The exception is that when talking explicitly of programs in
+          languages like C that have only functions, we shall refer to them as
+          \functions." Or, if we are discussing a language like Java that has
+          only methods, we shall use that term instead. A function generally
+          returns a value of some type (the \return type"), while a procedure
+          does not return any value. C and similar languages, which have only
+          functions, treat procedures as functions that have a special return
+          type \void," to signify no return value. Ob ject-oriented languages
+          like Java and C++ use the term \methods." These can behave like either
+          functions or procedures, but are associated with a particular class.
+        </p>
 
-            <p> Calling conventions are low level implementations that tell functions how to receive arguments from their calling functions and how to return results. A calling function is a function that has a function call within its scope. </p>
+        <h3>Calling Conventions</h3>
 
-            <div id="embedded-code">
-                <script src="https://gist.github.com/rust-play/1265cca6ba7030d3a5ebab72d16795b4.js"></script>
-            </div>
-            
-            <p>A calling function<a href="https://www.google.com/search?q=caller&sxsrf=APwXEdfLntL58Sc6WGFz3pS2Xkxqpehkhg%3A1680452198078&ei=ZqopZL6qBIqN9u8P5YmM6Aw&ved=0ahUKEwi-9c-izIv-AhWKhv0HHeUEA80Q4dUDCA8&uact=5&oq=caller&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQigUQsAMQQzIKCAAQigUQsAMQQzIKCAAQigUQsAMQQzIKCAAQigUQsAMQQzINCAAQ5AIQ1gQQsAMYATINCAAQ5AIQ1gQQsAMYATINCAAQ5AIQ1gQQsAMYATIPCC4QigUQyAMQsAMQQxgCMhUILhCKBRDHARDRAxDIAxCwAxBDGAJKBAhBGABQzQJYvgRg3AVoAXABeACAAQCIAQCSAQCYAQCgAQHIARHAAQHaAQYIARABGAnaAQYIAhABGAg&sclient=gws-wiz-serp">(caller)</a> in the above code refers to <code id="oneline">main()</code> and its <a href="https://www.google.com/search?q=callee&oq=callee&aqs=chrome..69i57j0i512l9.1966j1j7&sourceid=chrome&ie=UTF-8">callee</a> (the function that it calls) is <code id="oneline">print_specimen</code> which in turn is a calling function to <code id="oneline">print_age</code>. A calling function can be a callee to another function. Calling conventions in this case basically are the low level implementations of how <code id="oneline">print_age</code> receives the <code id="oneline">age</code> argument from <code id="oneline">print_specimen</code>. </p>
+        <p>
+          Calling conventions are low level implementations that tell functions
+          how to receive arguments from their calling functions and how to
+          return results. A calling function is a function that has a function
+          call within its scope.
+        </p>
 
-            <p>
-                While writing programs, it is commonplace to see functions being called here and there. Some passing arguments from one function to another like the example above and other return values that will be used to feed into other functions as arguments. At the lowest level of what makes this feature of languages tick, lies calling conventions. Ah! almighty calling conventions. 
-            </p>
-            <p>
-                Calling conventions are usually said to be part of the ABI. They are not part of the programming language. They give instructions to a programming language compiler. Also adherence to the calling convention falls onto the operating system or library writer. Systems engineers might find themselves dealing with calling conventions if they are writing programs with a mix of languages or having a language their application is written in having to talk to the underlying platform where there is no interface to make such communication possible. 
-            </p>
+        <div id="embedded-code">
+          <script src="https://gist.github.com/rust-play/1265cca6ba7030d3a5ebab72d16795b4.js"></script>
+        </div>
 
-            <p>
-                Below is an example of Rust functions that use the <a href="https://en.wikipedia.org/wiki/X86_calling_conventions#Caller_clean-up">C</a> and <a href="https://en.wikipedia.org/wiki/X86_calling_conventions#x86-64_calling_conventions">x86_interrupt calling conventions</a> respectively. 
-            </p>
-            <div id="embedded-code"> 
-                <script src="https://gist.github.com/rust-play/c8ddf283d0258f88b12dafd2f1642765.js"></script>
-            </div>
+        <p>
+          A calling function<a
+            href="https://www.google.com/search?q=caller&sxsrf=APwXEdfLntL58Sc6WGFz3pS2Xkxqpehkhg%3A1680452198078&ei=ZqopZL6qBIqN9u8P5YmM6Aw&ved=0ahUKEwi-9c-izIv-AhWKhv0HHeUEA80Q4dUDCA8&uact=5&oq=caller&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQigUQsAMQQzIKCAAQigUQsAMQQzIKCAAQigUQsAMQQzIKCAAQigUQsAMQQzINCAAQ5AIQ1gQQsAMYATINCAAQ5AIQ1gQQsAMYATINCAAQ5AIQ1gQQsAMYATIPCC4QigUQyAMQsAMQQxgCMhUILhCKBRDHARDRAxDIAxCwAxBDGAJKBAhBGABQzQJYvgRg3AVoAXABeACAAQCIAQCSAQCYAQCgAQHIARHAAQHaAQYIARABGAnaAQYIAhABGAg&sclient=gws-wiz-serp"
+            >(caller)</a
+          >
+          in the above code refers to <code id="oneline">main()</code> and its
+          <a
+            href="https://www.google.com/search?q=callee&oq=callee&aqs=chrome..69i57j0i512l9.1966j1j7&sourceid=chrome&ie=UTF-8"
+            >callee</a
+          >
+          (the function that it calls) is
+          <code id="oneline">print_specimen</code> which in turn is a calling
+          function to <code id="oneline">print_age</code>. A calling function
+          can be a callee to another function. Calling conventions in this case
+          basically are the low level implementations of how
+          <code id="oneline">print_age</code> receives the
+          <code id="oneline">age</code> argument from
+          <code id="oneline">print_specimen</code>.
+        </p>
 
-            <h3> Okay, How many are there? </h3>
+        <p>
+          While writing programs, it is commonplace to see functions being
+          called here and there. Some passing arguments from one function to
+          another like the example above and other return values that will be
+          used to feed into other functions as arguments. At the lowest level of
+          what makes this feature of languages tick, lies calling conventions.
+          Ah! almighty calling conventions.
+        </p>
+        <p>
+          Calling conventions are usually said to be part of the ABI. They are
+          not part of the programming language. They give instructions to a
+          programming language compiler. Also adherence to the calling
+          convention falls onto the operating system or library writer. Systems
+          engineers might find themselves dealing with calling conventions if
+          they are writing programs with a mix of languages or having a language
+          their application is written in having to talk to the underlying
+          platform where there is no interface to make such communication
+          possible.
+        </p>
 
-            <p> 
-                There are several calling conventions more than we would like to count. They can differ in several subtle places like where parameters are stored in memory. Parameters passed to functions following one or another calling conventions could stored in
-            </p>
+        <p>
+          Below is an example of Rust functions that use the
+          <a
+            href="https://en.wikipedia.org/wiki/X86_calling_conventions#Caller_clean-up"
+            >C</a
+          >
+          and
+          <a
+            href="https://en.wikipedia.org/wiki/X86_calling_conventions#x86-64_calling_conventions"
+            >x86_interrupt calling conventions</a
+          >
+          respectively.
+        </p>
+        <div id="embedded-code">
+          <script src="https://gist.github.com/rust-play/c8ddf283d0258f88b12dafd2f1642765.js"></script>
+        </div>
 
-            <ol type="A">
-                <li>A. Registers </li>
-                <li>B. Stack </li>
-                <li>C. Heap </li>
-                <li>D. A mixture of any of the above. </li>
-            </ol>
-            <br />
+        <h3>Okay, How many are there?</h3>
 
-            <p>
-                Languages like Python, JavaScript, Ruby are said to be <a href="https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_sharing">call-by-sharing</a>. It should be noted that this term is inconsistent with other sources that refers to call-by-sharing with other names. 
-            </p>
-            <p>
-                Rust supports a handful of calling conventions. Rust allows the programmer to write programs that use functions from other languages where there is the need to use calling conventions to get the underlying platform to do some task. 
-            </p>
-            <p>
-                The sample code above already shows us using two distinct calling conventions in our rust code. The code is actually from Oubre OS, an Operating System that I am building in Rust. 
-            </p>
+        <p>
+          There are several calling conventions more than we would like to
+          count. They can differ in several subtle places like where parameters
+          are stored in memory. Parameters passed to functions following one or
+          another calling conventions could stored in
+        </p>
 
+        <ol type="A">
+          <li>A. Registers</li>
+          <li>B. Stack</li>
+          <li>C. Heap</li>
+          <li>D. A mixture of any of the above.</li>
+        </ol>
+        <br />
 
-        </section>
-
+        <p>
+          Languages like Python, JavaScript, Ruby are said to be
+          <a
+            href="https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_sharing"
+            >call-by-sharing</a
+          >. It should be noted that this term is inconsistent with other
+          sources that refers to call-by-sharing with other names.
+        </p>
+        <p>
+          Rust supports a handful of calling conventions. Rust allows the
+          programmer to write programs that use functions from other languages
+          where there is the need to use calling conventions to get the
+          underlying platform to do some task.
+        </p>
+        <p>
+          The sample code above already shows us using two distinct calling
+          conventions in our rust code. The code is actually from Oubre OS, an
+          Operating System that I am building in Rust.
+        </p>
+      </section>
     </div>
 
     <footer id="foot">
-        <p> Made with 💖 by Rasheed Starlet </p>
+      <p>Made with 💖 by Rasheed Starlet</p>
     </footer>
-
-</body>
-
+  </body>
 </html>
