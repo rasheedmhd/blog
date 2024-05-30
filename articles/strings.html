@@ -132,7 +132,7 @@
                 simple. The capacity is the total number of bytes allocated for the String's data. That means we can
                 have a string data that doesn't use all the bytes that the OS allocates for it, in which case the
                 Capacity will be bigger than the length, or we can have the String's data consume all the bytes, in this
-                case the length and the capacity are the same. If the allocated memory weren’t dynamically resizable, We
+                case the length and the capacity are the same. If the allocated memory weren't dynamically resizable, We
                 could have another case where the String's data is bigger than the capacity. But how? Hear me out. We
                 already said the String data type is growable. But, how do we grow a String? The String data type has
                 methods that we can use to add data to the String instance, essentially growing it.
@@ -141,11 +141,11 @@
             <div id="code">
                 <pre class=”line-numbers”>
                     <code class="language-rust">
-                        let mut comm = String::from("Dev");
+                let mut comm = String::from("Dev");
 
-                        comm.push_str("Congress"); // push_str() appends a literal to a String
+                comm.push_str("Congress"); // push_str() appends a literal to a String
 
-                        println!("{}", comm); // This will print the string `DevCongress`
+                println!("{}", comm); // This will print the string `DevCongress`
                     </code>
                 </pre>
             </div>
@@ -196,9 +196,9 @@
             <div id="code">
                 <pre class=”line-numbers”>
                     <code class="language-rust">
-                        let a = 13;
-                        let b = a;
-                        println!("a: {}, b: {}", a, b); // prints 'a: 13, b: 13'
+                let a = 13;
+                let b = a;
+                println!("a: {}, b: {}", a, b); // prints 'a: 13, b: 13'
                     </code>
                 </pre>
             </div>
@@ -214,9 +214,9 @@
             <div id="code">
                 <pre>
                     <code>
-                        let comm = String::from("Rust Study Group");
-                        let group = comm;
-                        println!("comm: {}, group: {}", comm, group);
+                let comm = String::from("Rust Study Group");
+                let group = comm;
+                println!("comm: {}, group: {}", comm, group);
                     </code>
                 </pre>
             </div>
@@ -250,7 +250,7 @@
                 the value is dropped. What happens if our program transitions from the scope of comm and group? comm and
                 group should be dropped, as per Ownership rule #3. But now we have 2 variables pointing to the same
                 memory. If Rust tried dropping group and <code id="oneline">comm</code>, By the time it tried to drop
-                <code id="oneline">comm</code>, <code id="oneline">groud</code> would have been
+                <code id="oneline">comm</code>, <code id="oneline">group</code> would have been
                 dropped already leaving us with what we call double-frees. Double free is definitely a memory bug and as
                 Graydon Hoare states, [Memory] Safety is <a href="https://graydon2.dreamwidth.org/247406.html">Rust's
                     raison d'etre</a>; we need to find a way to solve this problem.
@@ -258,7 +258,7 @@
 
             <p>
                 How does Rust manage double free errors, in this situation? Move. When we bound <code
-                    id="oneline">groud</code> to <code id="oneline">comm</code>, Rust
+                    id="oneline">group</code> to <code id="oneline">comm</code>, Rust
                 made sure to drop <code id="oneline">comm</code>, Making <code id="oneline">group</code> the only owner
                 of the
                 data stored in the heap. In this way,

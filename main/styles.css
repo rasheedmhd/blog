@@ -44,7 +44,7 @@ header  h1 {
 #main p {
     font-family: 'Work Sans', sans-serif;
 	font-size: 18px;
-	color: grey;
+	color: rgb(42, 42, 42);
 	margin-bottom: 13px;
 	line-height: 2rem;
 }
