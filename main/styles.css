@@ -98,7 +98,7 @@ header  h1 {
     margin: 4px;
     padding: 4px;
     border-radius: 4px;
-    background-color: #eff3f3;
+    background-color: rgb(41, 43, 56);
     color: #FF9E56;
 }
 
@@ -106,4 +106,44 @@ header  h1 {
 img {
     margin: auto;
     width: 90%;
+}
+
+
+/* --- CODE HIGHLIGHT ------------------------------------------------------- */
+
+.code-variable {
+    color: rgb(219, 148, 14);
+}
+
+.code-string {
+    color: rgb(94, 173, 94);
+}
+
+.code-background {
+    background-color: rgb(41, 43, 56);
+	color: white;
+}
+
+
+.code-comment {
+    color: rgb(167, 167, 167);
+}
+
+.code-keyword {
+    color: rgb(255, 69, 138);
+}
+
+.code-title {
+    color: rgb(56, 146, 240);
+}
+
+.highlight {
+	padding: 20px;
+	margin-top: 5px;
+    background-color: rgb(231, 241, 252);
+	border-left: 10px solid rgb(56, 146, 240);
+}
+
+.code-number {
+    color: rgb(108, 78, 255);
 }

@@ -40,7 +40,7 @@
 
             <p>
                 What led me to writing this article is that, I realized that the Rust Book drawings of how Rust
-                represent Strings in memory wasn't clear enough. I took to excalidraw to draw the diagrams in a more
+                represent Strings in memory wasn't clear enough. I took to Excalidraw to draw the diagrams in a more
                 understandable way with intentions of showing it on Wednesday during our DevCongress Rust Study Group
                 meeting. When I was done with the drawing, I realized that understanding how Rust store Strings in
                 memory and the need to prevent double frees, gives one an intuitive understanding of Rust move
@@ -51,11 +51,12 @@
             </p>
 
             <h2>The 3 cardinal Ownership rules</h2>
-            <p>
-                1. Each Value has an Owner.
-                2. Each Value must have only one Owner.
-                3. When the owner of a value goes out of Scope, the value is dropped.
-            </p>
+            <ol class="highlight">
+                <li>1. Each Value has an Owner.</li>
+                <li>2. Each Value must have only one Owner.</li>
+                <li>3. When the owner of a value goes out of Scope, the value is dropped.</li>
+            </ol>
+            <br>
 
             <p>
                 These are the rules that power Rust's advanced type system. These rules might be simple and easy to
@@ -138,17 +139,15 @@
                 methods that we can use to add data to the String instance, essentially growing it.
             </p>
 
-            <div id="code">
-                <pre class=”line-numbers”>
-                    <code class="language-rust">
-                let mut comm = String::from("Dev");
+<pre class="code-background">
+    <code class="language-rust">
+    <span class="code-keyword">let mut</span> <span class="code-variable">comm</span> = <span class="code-title">String</span><span class="code-keyword">::</span>from(<span class="code-string">"Dev"</span>);
 
-                comm.push_str("Congress"); // push_str() appends a literal to a String
+    <span class="code-variable">comm</span><span class="code-keyword">.</span>push_str(<span class="code-string">"Congress"</span>); <span class="code-comment">// push_str() appends a literal to a String</span>
 
-                println!("{}", comm); // This will print the string `DevCongress`
-                    </code>
-                </pre>
-            </div>
+    <span class="code-keyword">println!</span>(<span class="code-string">"{}",</span> <span class="code-variable">comm</span>); <span class="code-comment">// This will print the string `DevCongress`</span>
+    </code>
+</pre>
 
             <p>
                 When we wrote the line above, we got allocated with some memory, of length 3 and capacity 3. Later we
@@ -193,15 +192,13 @@
             <h2> Understanding Moves </h2>
 
 
-            <div id="code">
-                <pre class=”line-numbers”>
-                    <code class="language-rust">
-                let a = 13;
-                let b = a;
-                println!("a: {}, b: {}", a, b); // prints 'a: 13, b: 13'
-                    </code>
-                </pre>
-            </div>
+<pre class="code-background">
+    <code class="language-rust">
+    <span class="code-keyword">let</span> <span class="code-variable">a</span> = <span class="code-number">13</span>
+    <span class="code-keyword">let</span> <span class="code-variable">b</span> = <span class="code-variable">a</span>
+    <span class="code-keyword">println!</span>(<span class="code-string">"a: {}, b: {}"</span>, <span class="code-variable">a</span>, <span class="code-variable">b</span>); <span class="code-comment">// prints 'a: 13, b: 13'</span>
+    </code>
+</pre>
 
             <p>
                 If you compiled this it would run without issues, this works because Rust Scalar data types are
@@ -211,15 +208,16 @@
             </p>
 
 
-            <div id="code">
-                <pre>
-                    <code>
-                let comm = String::from("Rust Study Group");
-                let group = comm;
-                println!("comm: {}, group: {}", comm, group);
-                    </code>
-                </pre>
-            </div>
+<pre class="code-background">
+    <code class="language-rust">
+    <span class="code-keyword">let</span> <span class="code-variable">comm</span> = <span class="code-title">String</span><span class="code-keyword">::</span>from(<span class="code-string">"Rust Study Group"</span>);
+
+    <span class="code-keyword">let</span> <span class="code-variable">comm</span> = <span class="code-variable">comm</span>;
+
+    <span class="code-keyword">println!</span>(<span class="code-string">"community: {}, group: {}"</span>, <span class="code-variable">comm</span>, <span class="code-variable">group</span>);
+    </code>
+</pre>
+
 
             <p>
                 One would expect the above to work like that, but it doesn't. You see, Strings can be very huge, they
