@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -120,6 +123,7 @@ img {
 }
 
 .code-background {
+	font-family: "IBM Plex Mono", monospace;
     background-color: rgb(41, 43, 56);
 	color: white;
 }
