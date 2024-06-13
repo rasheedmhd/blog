@@ -36,17 +36,17 @@
             <br />
 
             <p>
-                When we pass the value of <code id="oneline">hero</code> to <code id="oneline">take_ownership()</code>,
+                When we pass the value of <code id="oneline">hero</code> to <code id="oneline"><span class="code-title">take_ownership()</span></code>,
                 <code id="oneline">hero</code> becomes uninitialized since its value has
-                been moved. Rust won’t compile because we are printing the value of <code id="oneline">hero</code> after
+                been moved. Rust won't compile because we are printing the value of <code id="oneline">hero</code> after
                 it has been given to
-                <code id="oneline">take_ownership()</code>.
+                <code id="oneline"><span class="code-title">take_ownership()</span></span></code>.
             </p>
 
             <p>
                 String data types, willingly give ownership when they are bound to other variables or passed as
                 arguments
-                to functions that aren’t borrowing from them.
+                to functions that aren't borrowing from them.
             </p>
 
             <h3> Scalar Data Types </h3>
@@ -72,7 +72,7 @@
             </div>
             <br />
 
-            <p>When we try compiling we get this error. <code id="oneline">error[E0507]: cannot move out of index of `Vec<String>`</code> </p>
+            <p>When we try compiling we get this error. <code id="oneline"><span class="code-comment">error[E0507]: cannot move out of index of `Vec<String>`</span></code> </p>
 
             <p>
                 When we bind a new variable to a String variable without borrowing, a move happens leaving the source
@@ -87,7 +87,7 @@
             </p>
 
             <p>
-                This adds more complexity to vectors and Rust, a vector should just be a vector and hence Rust doesn’t
+                This adds more complexity to vectors and Rust, a vector should just be a vector and hence Rust doesn't
                 allow us to do bindings like these.
             </p>
 
@@ -110,14 +110,14 @@
 
             <p>
                 First we set the <code id="oneline">lang</code> vector to mutable with <code id="oneline">mut</code>
-                Then we use the <code id="oneline">.pop()</code> method, to remove the last element of the vector. This
+                Then we use the <code id="oneline"><span class="code-keyword">.pop()</span></code> method, to remove the last element of the vector. This
                 might not be very useful in situations where we want to remove a value that is not the last value of the
                 vector.
             </p>
 
-            <h3> Using vector’s <code id="oneline">swap_remove</code> method </h3>
+            <h3> Using vector's <code id="oneline"><span class="code-keyword">swap_remove</span></code> method </h3>
             <p>
-                A vector’s swap_remove, takes an index of the vector and removes the value of its last index and
+                A vector's swap_remove, takes an index of the vector and removes the value of its last index and
                 replaces it
                 with the index of the value given to it.
             </p>
@@ -132,7 +132,7 @@
 
             <h3>std::mem::replace</h3>
             <p>
-                We can use <code id="oneline">std::mem::replace</code> to substitute a value at a particular index and
+                We can use <code id="oneline"><span class="code-keyword">std::mem::replace</span></code> to substitute a value at a particular index and
                 replace it with a different value.
             <p>
 
@@ -153,7 +153,7 @@
             <h3>Option&lt;T&gt;
             </h3>
             <p>
-                There might be situations where we want to move a value out of its owner that the compiler can’t check,
+                There might be situations where we want to move a value out of its owner that the compiler can't check,
                 in
                 such a situation we could consider changing the type of the value into a type that can dynamically check
                 whether it has a value or not.
@@ -167,9 +167,9 @@
             </div>
             <br />
 
-            <p>The compiler throws <code id="oneline"> error[E0507]: cannot move out of index of Vec&lt;Language&gt;</code> </p>
+            <p>The compiler throws <code id="oneline"><span class="code-comment">error[E0507]: cannot move out of index of Vec&lt;Language&gt;</span></code> </p>
             <p>
-                In line 6 of the code snippet above, we used <code id="oneline">Option&ltString&gt</code> instead of String yet we                    failed to move the value out. To move the value out we can use the <code id="oneline">std::mem::replace</code> method                 demonstrated above. With type <code id="oneline">Option&lt;String&gt;</code>, we can move the value out and replace it                with <code id="oneline">None</code>. Since an <code id="oneline">Option&lt;String&gt;</code> is an enum that has                   two variants of <code id="oneline">Some()</code> and <code id="oneline">None</code>.
+                In line 6 of the code snippet above, we used <code id="oneline">Option&ltString&gt</code> instead of String yet we failed to move the value out. To move the value out we can use the <code id="oneline"><span class="code-keyword">std::mem::replace</span></code> method demonstrated above. With type <code id="oneline">Option&lt;String&gt;</code>, we can move the value out and replace it with <code id="oneline"><span class="code-keyword">None</span></code>. Since an <code id="oneline">Option&lt;String&gt;</span></code> is an enum that has two variants of <code id="oneline"><span class="code-keyword">Some()</span></code> and <code id="oneline"><span class="code-keyword">None</span></code>.
             </p>
 
             <div id="embedded-code">
@@ -181,8 +181,8 @@
             <br />
 
             <p>
-                <code id="oneline">std::mem::replace</code> moves the value of <code
-                    id="oneline">languages[0].creator</code> out of its owner and passes ownership to <code
+                <code id="oneline"><span class="code-keyword">std::mem::replace</span></code> moves the value of <code
+                    id="oneline"><span class="code-keyword">languages</span>[<span class="code-number">0</span>]<span class="code-keyword">.</span><span class="code-title">creator</span></code> out of its owner and passes ownership to <code
                     id="oneline">rusty</code>. This practice is very common that there is a method for it.
             </p>
 
