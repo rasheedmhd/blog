@@ -57,7 +57,7 @@
           While studying Crafting Interpreters, in page 65 while talking about <a href="https://en.wikipedia.org/wiki/Expression_problem">The Expression Problem</a>, Bob. said that 
         </p>
         <br>
-        <hr>
+        <div class="highlight">
         <p>       
           "ML, short for 'metalanguage' was created by Robin Milner and friends and forms
           one of the main branches in the great programming language family tree. 
@@ -65,49 +65,48 @@
           Even Scala, Rust, and Swift bear a strong resemblance. 
           Much like Lisp, it is one of those languages that is so full of good ideas that language designers today are still rediscovering them over forty years later." 
         </p>
-        <hr>
+        </div>
 <br>
         <p> 
           Who wouldn't want to learn a language that had so many novel ideas in language design that over 40 years later, 
           other Programming Language designers are still taking ideas from? Well actually not a lot of people, first you probably have to be a programmer, but not me. That is ML. At this point I would probably say I am language designer sort of and I could make good use of some ideas. 
           One syntax that I found that I thought was pretty need is how you 
           can use <code id="oneline">#struct_item_name StructName;</code> to get the value of a struct item, borrowing from Rust terminology but in ML we call them Records.
-          <div id="code">
-            <pre class=”line-numbers”>
-                <code class="language-rust">
-          ML
-          ------
-          val Rust = {
-            creator = "Graydon Hoare",
-            company = "Mozilla",
-            release = 2015,
-            quote = "Rust's raison d'etre is safety"
-          };
 
-          #creator Rust;
-          (* This is weird and neat to me lol *)
+<pre class="code-background">
+  <code class="language-rust">
+  <span class="code-comment">ML</span>
+  <span class="code-comment">------</span>
+  <span class="code-keyword">val</span> <span class="code-variable">Rust</span> = {
+    creator = <span class="code-string">"Graydon Hoare",</span>
+    company = <span class="code-string">"Mozilla",</span>
+    release = <span class="code-number">2015,</span>
+    quote = <span class="code-string">"Rust's raison d'etre is safety"</span>
+  };
 
-          Rust
-          ------
-          struct Rust {
-            creator: String,
-            username: String,
-            email: String,
-            quote: String,
-          }
+  <span class="code-comment">#creator Rust;</span>
+  <span class="code-comment">(* This is weird and neat to me lol *)</span>
+
+  <span class="code-comment">Rust</span>
+  <span class="code-comment">------</span>
+  <span class="code-keyword">struct</span> <span class="code-title">Rust</span> {
+    creator: <span class="code-title">String,</span>
+    username: <span class="code-title">String,</span>
+    email: <span class="code-title">String,</span>
+    quote: <span class="code-title">String,</span>
+  }
         
-          let language = Rust {
-            creator: String::from("Graydon Hoare"),
-            company: String::from("Mozilla"),
-            release: 2015,
-            quote: String::from("Rust's Raison de'tre is safety")
-          };
+  <span class="code-keyword">let</span> <span class="code-variable">language</span> = <span class="code-keyword">Rust</span> {
+    creator: String<span class="code-keyword">::</span>from(<span class="code-string">"Graydon Hoare"</span>),
+    company: String<span class="code-keyword">::</span>from(<span class="code-string">"Mozilla"</span>),
+    release: <span class="code-number">2015,</span>
+    quote: String<span class="code-keyword">::</span>from(<span class="code-string">"Rust's Raison de'tre is safety"</span>)
+  };
 
-          language.creator;
-            </code>
-          </pre>
-      </div>
-      </p>
+  <span class="code-comment">language.creator;</span>
+  </code>
+</pre>
+
 
         <p>
           When I wanted to learn OCaml, it was because I read somewhere that OCaml was used to write the first Rust Compiler.
@@ -151,7 +150,7 @@
         <p> 
           In the early days when I started learning to code, I was obsessed with becoming a great programmer, and I would be asking the internet here and there, how to become one but when I found his article I stopped searching. I hope that even if you don't find this article interesting, you would love Peter's advice linked above.In one section of the article he said, 
         </p>
-<hr>
+        <div class="highlight">
         <p>  
           "Learn at least a half dozen programming languages. 
           Include one language that emphasizes class abstractions (like Java or C++), 
@@ -160,7 +159,7 @@
           one that supports declarative specifications (like Prolog or C++ templates), 
           and one that emphasizes parallelism (like Clojure or Go)."
         </p>
-        <hr>
+        </div>
         <br>
 
 
@@ -178,17 +177,15 @@
         <h2> Rust Lifetimes and ML any Types</h2> -->
 
         <p> While I was learning I hit this error message and I couldn't help but notice how similar the syntax looks to Rust Lifetimes. There are probably several more features in Rust that comes from ML, hopefully, I will write another article as a learn more ML.</p>
-        <div id="code">
-          <pre class=”line-numbers”>
-              <code class="language-rust">
-          {born: int, crowned: 'a, died: int, name: 'b, quote: 'c} -> int
-          Here, 'a, 'b, and 'c are type variables that can be any type, 
-          since they are not used in any operations within the function. 
-          The fields born and died must be of type int because they are 
-          used in the subtraction operation.
-              </code>
-            </pre>
-        </div>
+<pre class="code-background">
+  <code class="language-rust code-comment">
+  {born: int, crowned: 'a, died: int, name: 'b, quote: 'c} -> int
+  Here, 'a, 'b, and 'c are type variables that can be any type, 
+  since they are not used in any operations within the function. 
+  The fields born and died must be of type int because they are 
+  used in the subtraction operation.
+  </code>
+</pre>
         <br>
 
         <h2>3. Learn 1 get 10 free. </h2>
