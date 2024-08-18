@@ -1,16 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
 
-
 * {
 	margin: 0px;
 	padding: 0px;
 }
 
 body {
-    font-family: 'Lexend Deca', sans-serif;
-    /* font-family: 'Work Sans', sans-serif; */
+	font-family: "Lexend Deca", sans-serif;
+	/* font-family: 'Work Sans', sans-serif; */
 	height: 100vh;
 	width: 100%;
+}
+
+/* Default styles for non-mobile screens */
+#wrapper {
+	width: 60%;
+	margin: auto;
+}
+
+#main h1 {
+	font-size: 74px;
+	margin-top: 3px;
+	margin-bottom: 30px;
+}
+
+/* Styles for mobile screens */
+@media only screen and (max-width: 600px) {
+	body {
+		width: 90%;
+		margin: auto;
+		padding: 10px; /* Add padding for mobile screens */
+	}
+
+	#main h1 {
+		font-size: 34px;
+		/* margin-top: 3px;
+		margin-bottom: 30px; */
+	}
+
+	#wrapper {
+		width: 90%;
+		padding: 10px;
+	}
 }
 
 .date {
@@ -35,34 +66,22 @@ a {
 	color: rgb(0, 123, 255);
 }
 
-header  h1 {
+header h1 {
 	font-size: 34px;
 }
 
 #rust-pg-link {
-    font-size: 14px;
-    color: grey;
+	font-size: 14px;
+	color: grey;
 }
 
 #main p {
-    font-family: 'Work Sans', sans-serif;
+	font-family: "Work Sans", sans-serif;
 	font-size: 18px;
 	color: rgb(42, 42, 42);
 	margin-bottom: 13px;
 	line-height: 2rem;
 }
-
-#main h1 {
-	font-size: 74px;
-	margin-top: 3px;
-	margin-bottom: 30px;
-}
-
-#wrapper {
-	width: 60%;
-	margin: auto;
-}
-
 
 #social {
 	background-color: #0087ff;
@@ -77,77 +96,72 @@ header  h1 {
 	margin: 60px 0 40px 0;
 }
 
-
 .footer {
 	margin-top: 60px;
 }
 
 #foot {
 	text-align: center;
-	padding:30px;
+	padding: 30px;
 }
 
 #code {
-    border-style: dashed;
-    margin: 10px;
-    padding: 10px;
-    background-color: #eff3f3;
-    color: #FF9E56;
+	border-style: dashed;
+	margin: 10px;
+	padding: 10px;
+	background-color: #eff3f3;
+	color: #ff9e56;
 }
-
 
 #oneline {
-    font-size: 16px;
-    margin: 4px;
-    padding: 4px;
-    border-radius: 4px;
-    background-color: rgb(41, 43, 56);
-    color: #FF9E56;
+	font-size: 16px;
+	margin: 4px;
+	padding: 4px;
+	border-radius: 4px;
+	background-color: rgb(41, 43, 56);
+	color: #ff9e56;
 }
-
 
 img {
-    margin: auto;
-    width: 90%;
+	margin: auto;
+	width: 90%;
 }
-
 
 /* --- CODE HIGHLIGHT ------------------------------------------------------- */
 
 .code-variable {
-    color: rgb(219, 148, 14);
+	color: rgb(219, 148, 14);
 }
 
 .code-string {
-    color: rgb(94, 173, 94);
+	color: rgb(94, 173, 94);
 }
 
 .code-background {
 	font-family: "IBM Plex Mono", monospace;
-    background-color: rgb(41, 43, 56);
+	background-color: rgb(41, 43, 56);
 	color: white;
 }
 
-
 .code-comment {
-    color: rgb(167, 167, 167);
+	color: rgb(167, 167, 167);
 }
 
 .code-keyword {
-    color: rgb(255, 69, 138);
+	color: rgb(255, 69, 138);
 }
 
 .code-title {
-    color: rgb(56, 146, 240);
+	color: rgb(56, 146, 240);
 }
 
 .highlight {
 	padding: 20px;
 	margin-top: 5px;
-    background-color: rgb(231, 241, 252);
+	background-color: rgb(231, 241, 252);
 	border-left: 10px solid rgb(56, 146, 240);
 }
 
 .code-number {
-    color: rgb(108, 78, 255);
+	color: rgb(108, 78, 255);
 }

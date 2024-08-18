@@ -1,110 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Interrupts | Rasheed Starlet</title>
+		<link rel="stylesheet" type="text/css" href="../main/styles.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="utf-8">
-    <title> Interrupts | Rasheed Starlet </title>
-    <link rel="stylesheet" type="text/css" href="../main/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap" rel="stylesheet">
-    <script src="main.js"></script>
-</head>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="main.js"></script>
+	</head>
 
-<body>
-    <div id="wrapper">
-        <header id="head">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../main/blog.html">Blog</a></li>
-                <li><a href="../main/projects.html">Projects</a></li>
-                <li><a href="../main/languages.html">Languages</a></li>
-            </ul>
-        </header>
+	<body>
+		<div id="wrapper">
+			<header id="head">
+				<ul>
+					<li><a href="../index.html">Home</a></li>
+					<li><a href="../main/blog.html">Blog</a></li>
+					<li><a href="../main/projects.html">Projects</a></li>
+					<li><a href="../main/languages.html">Languages</a></li>
+				</ul>
+			</header>
 
-        <section id="main">
-            <p class="date"> 10th April, 2023</p>
+			<section id="main">
+				<p class="date">10th April, 2023</p>
 
-            <h1> Exceptions and Interrupts </h1>
+				<h1>Exceptions and Interrupts</h1>
 
-            <h3> Exceptions </h3>
-            <p>
-                Exceptions occur when the processor encounters an error while processing an instruction. For example, if the processor encounters a divide by zero operation. They occur within the currently executing task. When exceptions occur they signal the processor to call a function predefined in a memory structure called the Interrupt Descriptor Table. This is called exception handling. 
-            </p>
+				<h3>Exceptions</h3>
+				<p>
+					Exceptions occur when the processor encounters an error
+					while processing an instruction. For example, if the
+					processor encounters a divide by zero operation. They occur
+					within the currently executing task. When exceptions occur
+					they signal the processor to call a function predefined in a
+					memory structure called the Interrupt Descriptor Table. This
+					is called exception handling.
+				</p>
 
-            <h3>Interrupt</h3>
-            <p>
-                An Interrupt is a  method that a peripheral device uses to communicate with the processor. Interrupts are signals to the processor telling it that there is an event coming from the peripheral device that it needs to handle.
-            </p>
+				<h3>Interrupt</h3>
+				<p>
+					An Interrupt is a method that a peripheral device uses to
+					communicate with the processor. Interrupts are signals to
+					the processor telling it that there is an event coming from
+					the peripheral device that it needs to handle.
+				</p>
 
-            <h3>Memory-mapped I/O(MMIO)</h3> 
-            <p> 
-                MMIO is another mechanism that peripheral devices use to communicate to the processor. MMIO uses the same address space for I/O devices and main memory. The memory and registers are mapped to the address space. Since one address space is used for main memory and I/O devices, an address might  be mapped to main memory or an I/O device. MMIO has a complementary method called <b>Port-Mapped I/O.</b>
-            </p>
+				<h3>Memory-mapped I/O(MMIO)</h3>
+				<p>
+					MMIO is another mechanism that peripheral devices use to
+					communicate to the processor. MMIO uses the same address
+					space for I/O devices and main memory. The memory and
+					registers are mapped to the address space. Since one address
+					space is used for main memory and I/O devices, an address
+					might be mapped to main memory or an I/O device. MMIO has a
+					complementary method called <b>Port-Mapped I/O.</b>
+				</p>
 
+				<h3>Polling</h3>
+				<p>
+					Polling is another method that the processor uses to
+					communicate with I/O devices. In polling the processor has
+					to constantly ping the I/O device to see if it is ready for
+					access, if it is not, the processor returns to a different
+					task and comes back later to check again, repeatedly. This
+					is wasteful of the processor resources. An interrupt-driven
+					I/O method as mentioned above is usually better.
+				</p>
+				<p>
+					In I/O device to processor communication, the processor can
+					always choose to handle the Interrupt Request immediately or
+					schedule it for later.
+				</p>
 
-            <h3>Polling</h3>
-             <p> 
-                Polling is another method that the processor uses to communicate with I/O devices. In polling the processor has to constantly ping the I/O device to see if it is ready for access, if it is not, the processor returns to a different task and comes back later to check again, repeatedly. This is wasteful of the processor resources. An interrupt-driven I/O method as mentioned above is usually better.
-            </p>
-            <p>  
-                In I/O device to processor communication, the processor can always choose to handle the Interrupt Request immediately or schedule it for later.
-            </p>
+				<h3>Exceptions v Interrupts</h3>
 
-            <h3>Exceptions v Interrupts</h3>
+				<p>
+					Exceptions and Interrupts are basically the same at their
+					core. They only differ in the contexts in which they occur.
+					Interrupts occur asynchronously while exceptions occur
+					synchronously.
+				</p>
+				<p>
+					When exceptions and interrupts occur, the processor is
+					forced to pause the executing task to handle them. The
+					current task is paused, its state parked, the exception or
+					interrupt is handled, and then the task is resumed. The
+					question, are all tasks pause-able and how the processor
+					determines exactly when to pause them is not discussed here.
+				</p>
+				<p>
+					Exceptions occur synchronously within the context of the
+					running execution.
+				</p>
+				<p>
+					Interrupts occur out of the executing task. They are used by
+					peripheral devices to signal the processor instead.
+				</p>
 
-            <p>
-                Exceptions and Interrupts are basically the same at their core. They only differ in the contexts in which they occur. Interrupts occur asynchronously while exceptions occur synchronously. 
-            </p>
-            <p>
-                When exceptions and interrupts occur, the processor is forced to pause the executing task to handle them. The current task is paused, its state parked, the exception or interrupt is handled, and then the task is resumed. The question, are all tasks pause-able and how the processor determines exactly when to pause them is not discussed here.
-            </p>
-            <p>Exceptions occur synchronously within the context of the running execution.</p>
-            <p> 
-                Interrupts occur out of the executing task. They are used by peripheral devices to signal the processor instead.
-            </p>
+				<h3>Interrupt Descriptor Table</h3>
 
-            <h3>Interrupt Descriptor Table</h3>
+				<p>
+					The Interrupt Descriptor Table (IDT) is a mapping of
+					interrupts and exceptions to their handlers. Each interrupt
+					or exception is assigned a fixed vector (number) in the IDT
+					which maps to its handle. So when an interrupt or exception
+					occurs the processor uses its vector number to retrieve and
+					call its handler. This is called interrupt or exception
+					handling.
+				</p>
 
-            <p>
-                The Interrupt Descriptor Table (IDT) is a mapping of interrupts and exceptions to their handlers. Each interrupt or exception is assigned a fixed vector (number) in the IDT which maps to its handle. So when an interrupt or exception occurs the processor uses its vector number to retrieve and call its handler. This is called interrupt or exception handling.
-            </p>
+				<p>
+					The IDT is a table of 255 mappings. The first 32 are
+					reserved and mapped to well known interrupts by the
+					hardware. The first 32 entries of the table have mappings of
+					interrupts/exceptions to functions.
+				</p>
+				<p>
+					The remaining are available for the programmer to setup the
+					interrupt system. With interrupts, there is the Programmable
+					Interrupt Chips that helps the processor handle interrupt
+					requests from multiple sources (e.g. external I/O devices).
+				</p>
 
-            <p>
-                The IDT is a table of 255 mappings. The first 32 are reserved and mapped to well known interrupts by the hardware. The first 32 entries of the table have mappings of interrupts/exceptions to functions. 
-            </p>
-            <p>
-                The remaining are available for the programmer to setup the interrupt system. With interrupts, there is the Programmable Interrupt Chips that helps the processor handle interrupt requests from multiple sources (e.g. external I/O devices). </p>
+				<h3>Applying the idea of the IDT to a user-space program</h3>
+				<p>
+					A web server could be configured with a table of error codes
+					mapped to web pages.
+				</p>
 
-            <h3> Applying the idea of the IDT to a user-space program </h3>
-            <p> A web server could be configured with a table of error codes mapped to web pages.</p>
+				<p>
+					The web server could be asked to query a particular database
+					across the world for user profiles. Depending on the
+					response the web server gets from the database it displays a
+					particular web page to the user. The response could be HTTP
+					error codes. Based on the error code received, the web
+					server displays the page that was mapped to it in its
+					internal table.
+				</p>
 
-            <p>
-                The web server could be asked to query a particular database across the world for user profiles. Depending on the response the web server gets from the database it displays a particular web page to the user. The response could be HTTP error codes. Based on the error code received, the web server displays the page that was mapped to it in its internal table. 
-            </p>
+				<p>
+					A good API design would require the developer to map error
+					codes to specific error handlers.
+				</p>
 
-            <p> A good API design would require the developer to map error codes to specific error handlers. </p>
+				<p>
+					This design would require that when a particular kind of
+					error code is encountered, a handler function that
+					corresponds to the error code mapping is called.
+				</p>
 
-            <p>
-                This design would require that when a particular kind of error code is encountered, a handler function that corresponds to the error code mapping is called. 
-            </p>
+				<div id="embedded-code">
+					<script src="https://gist.github.com/rust-play/2b87ac2ab38ce37456110fdb91fd7f9b.js"></script>
+				</div>
 
-            <div id="embedded-code"> 
-                <script src="https://gist.github.com/rust-play/2b87ac2ab38ce37456110fdb91fd7f9b.js"></script>
-            </div>
+				<p>that way you avoid ugly code such as:</p>
 
-            <p> that way you avoid ugly code such as: </p>
+				<div id="embedded-code">
+					<script src="https://gist.github.com/rust-play/ad9bc28c1e1412f2d18d64280a002b67.js"></script>
+				</div>
+			</section>
+		</div>
 
-            <div id="embedded-code"> 
-                <script src="https://gist.github.com/rust-play/ad9bc28c1e1412f2d18d64280a002b67.js"></script>
-            </div>
-
-        </section>
-
-    </div>
-
-    <footer id="foot">
-        <p> Made with 💖 by Rasheed Starlet </p>
-    </footer>
-
-</body>
-
+		<footer id="foot">
+			<p>Made with 💖 by Rasheed Starlet</p>
+		</footer>
+	</body>
 </html>
