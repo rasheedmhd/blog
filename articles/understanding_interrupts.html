@@ -1,217 +1,200 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Understanding Interrupts | Rasheed Starlet</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <title>Understanding Interrupts | Rasheed Starlet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" type="text/css" href="../main/styles.css" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap"
-			rel="stylesheet"
-		/>
-		<script src="main.js"></script>
-	</head>
+    <link rel="stylesheet" type="text/css" href="../main/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="main.js"></script>
+  </head>
 
-	<body>
-		<div id="wrapper">
-			<header id="head">
-				<ul>
-					<li><a href="../index.html">Home</a></li>
-					<li><a href="../main/blog.html">Blog</a></li>
-					<li><a href="../main/projects.html">Projects</a></li>
-					<li><a href="../main/languages.html">Languages</a></li>
-				</ul>
-			</header>
+  <body>
+    <div id="wrapper">
+      <header id="head">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../main/blog.html">Blog</a></li>
+          <li><a href="../main/projects.html">Projects</a></li>
+          <li><a href="../main/languages.html">Languages</a></li>
+        </ul>
+      </header>
 
-			<section id="main">
-				<p class="date">10th April, 2023</p>
+      <section id="main">
+        <p class="date">10th April, 2023</p>
 
-				<h1>
-					An Interrupt-based communication system between a custom
-					hardware device and a custom processor.
-				</h1>
+        <h1>
+          An Interrupt-based communication system between a custom hardware
+          device and a custom processor.
+        </h1>
 
-				<h3>The Device</h3>
+        <h3>The Device</h3>
 
-				<p>
-					We are designing a drone that houses sensors to periodically
-					capture arial data and send to our custom designed CPU for
-					processing. Some of the data is needed as and when it is
-					captured and some is sent to the base for analysis.
-				</p>
+        <p>
+          We are designing a drone that houses sensors to periodically capture
+          arial data and send to our custom designed CPU for processing. Some of
+          the data is needed as and when it is captured and some is sent to the
+          base for analysis.
+        </p>
 
-				<p>
-					For the safety of the drone, the most important data that we
-					need to capture and process above all, is the data from the
-					proximity sensor. The CPU needs this data to calculate the
-					distance of the drone from the closest obstacle in real
-					time. The result of this computation is then used to steer
-					the drone away from crashing with the obstacle.
-				</p>
+        <p>
+          For the safety of the drone, the most important data that we need to
+          capture and process above all, is the data from the proximity sensor.
+          The CPU needs this data to calculate the distance of the drone from
+          the closest obstacle in real time. The result of this computation is
+          then used to steer the drone away from crashing with the obstacle.
+        </p>
 
-				<h3>The CPU</h3>
+        <h3>The CPU</h3>
 
-				<p>
-					We are designing a power efficient tiny CPU that can fit
-					well into the drone chassis. There is the need for it to be
-					well optimised to draw the least power usable and also to
-					not heat up during computation. It should be resilient in
-					diverse weather conditions by having a robust fault
-					tolerance.
-				</p>
+        <p>
+          We are designing a power efficient tiny CPU that can fit well into the
+          drone chassis. There is the need for it to be well optimised to draw
+          the least power usable and also to not heat up during computation. It
+          should be resilient in diverse weather conditions by having a robust
+          fault tolerance.
+        </p>
 
-				<p>
-					We need a communication system between the Sensors and the
-					CPU. This communication system will serve as the means by
-					which the sensors can send the data captured to the CPU for
-					processing. We will design an interrupt-based communication
-					system, allowing the sensors to communicate with the CPU
-					through
-					<a href="interrupts.html" targe="_blank">interrupts</a>.
-				</p>
+        <p>
+          We need a communication system between the Sensors and the CPU. This
+          communication system will serve as the means by which the sensors can
+          send the data captured to the CPU for processing. We will design an
+          interrupt-based communication system, allowing the sensors to
+          communicate with the CPU through
+          <a href="interrupts.html" targe="_blank">interrupts</a>.
+        </p>
 
-				<h3>The PIC</h3>
+        <h3>The PIC</h3>
 
-				<p>
-					The PIC(Programmable Interrupt Controller) is a microchip
-					that enables our designed CPU to handle hardware interrupts.
-					Hardware interrupts are the way by which our sensors
-					communicate with our CPU.
-				</p>
+        <p>
+          The PIC(Programmable Interrupt Controller) is a microchip that enables
+          our designed CPU to handle hardware interrupts. Hardware interrupts
+          are the way by which our sensors communicate with our CPU.
+        </p>
 
-				<p>
-					Our PIC chip can be connected with 8 sensors at a time. 1
-					PIC can be connected to another if there is the need for us
-					to use more sensors than 8. Below in a diagram showing our
-					sensors connected to the PIC which connects to the CPU.
-				</p>
+        <p>
+          Our PIC chip can be connected with 8 sensors at a time. 1 PIC can be
+          connected to another if there is the need for us to use more sensors
+          than 8. Below in a diagram showing our sensors connected to the PIC
+          which connects to the CPU.
+        </p>
 
-				<image
-					alt="Rust String Representation"
-					src="../images/pic.png"
-				></image>
+        <image alt="Rust String Representation" src="../images/pic.png"></image>
 
-				<p>
-					Taking a high level overview of how this system works,
-					Sensors capture data and send to the CPU for processing to
-					reorient the drone during flight.
-				</p>
+        <p>
+          Taking a high level overview of how this system works, Sensors capture
+          data and send to the CPU for processing to reorient the drone during
+          flight.
+        </p>
 
-				<p>
-					The reason for using this interrupt-based communication
-					system is to allow the CPU to do tasks and only attend to
-					the sensors when they capture data and want it to process.
-					This gives the illusion of the CPU multitasking which saves
-					us a lot of processing power and energy as well.
-				</p>
+        <p>
+          The reason for using this interrupt-based communication system is to
+          allow the CPU to do tasks and only attend to the sensors when they
+          capture data and want it to process. This gives the illusion of the
+          CPU multitasking which saves us a lot of processing power and energy
+          as well.
+        </p>
 
-				<p>
-					When a sensor wants to send data to the CPU it first sends
-					it to the PIC through a data line that connects it to the
-					PIC. The PIC could be one or two in this case we use two. We
-					are allowing the PIC to be connectable to each other to
-					allow the Drone to use more sensors later without a lot of
-					overhead getting it up and running. Let’s call the PIC that
-					connects to the CPU as the Primary PIC and the one that
-					connects to the Primary PIC as the Secondary PIC. If a
-					sensor connects to the PPIC, it sends data to the PPIC which
-					then sends the data directly to the CPU. If a sensor is
-					connected to the SPIC, the data is relayed by the SPIC to
-					the CPU through the PPIC.
-				</p>
+        <p>
+          When a sensor wants to send data to the CPU it first sends it to the
+          PIC through a data line that connects it to the PIC. The PIC could be
+          one or two in this case we use two. We are allowing the PIC to be
+          connectable to each other to allow the Drone to use more sensors later
+          without a lot of overhead getting it up and running. Let’s call the
+          PIC that connects to the CPU as the Primary PIC and the one that
+          connects to the Primary PIC as the Secondary PIC. If a sensor connects
+          to the PPIC, it sends data to the PPIC which then sends the data
+          directly to the CPU. If a sensor is connected to the SPIC, the data is
+          relayed by the SPIC to the CPU through the PPIC.
+        </p>
 
-				<p>
-					On a normal day the sensors send data to the CPU for
-					processing through a PICs. On some days where the weather is
-					not so good we can have real problems. One of such problems
-					is when interrupts happen so often that it becomes
-					impossible to handle them all at the same time.
-				</p>
+        <p>
+          On a normal day the sensors send data to the CPU for processing
+          through a PICs. On some days where the weather is not so good we can
+          have real problems. One of such problems is when interrupts happen so
+          often that it becomes impossible to handle them all at the same time.
+        </p>
 
-				<p>
-					On a rainy day, there happens to be a lot of clouds, a lot
-					of change in weather and temperature and a lot of turbulence
-					with a lot of specks flying around due to the wind. The CPU
-					could easily be overwhelmed.
-				</p>
+        <p>
+          On a rainy day, there happens to be a lot of clouds, a lot of change
+          in weather and temperature and a lot of turbulence with a lot of
+          specks flying around due to the wind. The CPU could easily be
+          overwhelmed.
+        </p>
 
-				<h3>Buffers</h3>
-				<p>
-					When the CPU gets overwhelmed with interrupts it sends a
-					stop signal to the PIC. The PIC then stops sending new data
-					to the CPU until it receives a send signal. While it waits,
-					it will temporarily store all new data in a global
-					fixed-size buffer.
-				</p>
+        <h3>Buffers</h3>
+        <p>
+          When the CPU gets overwhelmed with interrupts it sends a stop signal
+          to the PIC. The PIC then stops sending new data to the CPU until it
+          receives a send signal. While it waits, it will temporarily store all
+          new data in a global fixed-size buffer.
+        </p>
 
-				<p>
-					When the PIC's buffer fills up, it in turn sends a stop
-					signal to the sensors. How sensors respond to this signal is
-					described below.
-				</p>
+        <p>
+          When the PIC's buffer fills up, it in turn sends a stop signal to the
+          sensors. How sensors respond to this signal is described below.
+        </p>
 
-				<p>
-					We are also going to fit the sensors with a fixed-size
-					buffer too, similar to the PIC's. After receiving a stop
-					signal, this is where new data will be temporarily stored
-					until the send signal is received.
-				</p>
+        <p>
+          We are also going to fit the sensors with a fixed-size buffer too,
+          similar to the PIC's. After receiving a stop signal, this is where new
+          data will be temporarily stored until the send signal is received.
+        </p>
 
-				<h3>Prioritisation</h3>
+        <h3>Prioritisation</h3>
 
-				<p>
-					Inside the PICs, we are going to assign priorities to the
-					sensor data in the global buffer. We will be assigning the
-					highest priority to the proximity sensor. When the CPU is
-					ready to handle interrupts again, the data to first send
-					must be that of the proximity sensor’s.
-				</p>
+        <p>
+          Inside the PICs, we are going to assign priorities to the sensor data
+          in the global buffer. We will be assigning the highest priority to the
+          proximity sensor. When the CPU is ready to handle interrupts again,
+          the data to first send must be that of the proximity sensor’s.
+        </p>
 
-				<h3>Handling Obsolete Data</h3>
+        <h3>Handling Obsolete Data</h3>
 
-				<p>
-					Let’s say by the time the CPU is ready to handle interrupts,
-					the global buffer is holding several different data from the
-					proximity sensor. We already know what data we are getting
-					from the proximity sensor and that is the distance. If we
-					have let’s say 7 different data points, the first 6 would be
-					obsolete since we need the latest data point to work with.
-					We discard the first 6 and only send the 7th (last) data
-					point to the CPU for processing.
-				</p>
+        <p>
+          Let’s say by the time the CPU is ready to handle interrupts, the
+          global buffer is holding several different data from the proximity
+          sensor. We already know what data we are getting from the proximity
+          sensor and that is the distance. If we have let’s say 7 different data
+          points, the first 6 would be obsolete since we need the latest data
+          point to work with. We discard the first 6 and only send the 7th
+          (last) data point to the CPU for processing.
+        </p>
 
-				<h3>Handling buffer overflows</h3>
-				<p>
-					We need to use a kind of buffer called a
-					<a href="https://en.wikipedia.org/wiki/Circular_buffer"
-						>Ring/Circular buffer</a
-					>. A Ring buffer is a data structure that uses a fixed-sized
-					buffer as if it were connected end-to-end. It starts out as
-					an empty buffer. When it gets filled with data, the first
-					data that was entered is evicted to allow space for the
-					incoming data. This is a property known as First-in
-					First-Out(FIFO). It should be noted how this looks similar
-					to the implementation above.
-				</p>
+        <h3>Handling buffer overflows</h3>
+        <p>
+          We need to use a kind of buffer called a
+          <a href="https://en.wikipedia.org/wiki/Circular_buffer"
+            >Ring/Circular buffer</a
+          >. A Ring buffer is a data structure that uses a fixed-sized buffer as
+          if it were connected end-to-end. It starts out as an empty buffer.
+          When it gets filled with data, the first data that was entered is
+          evicted to allow space for the incoming data. This is a property known
+          as First-in First-Out(FIFO). It should be noted how this looks similar
+          to the implementation above.
+        </p>
 
-				<h3>Redundancy</h3>
+        <h3>Redundancy</h3>
 
-				<p>
-					As a designer of this community protocol it is my hope that
-					the system never have to use to the maximum all the buffers
-					and prioritisation in the PICs with Sensors at the same time
-					but even if that happens, the implementation of the buffers,
-					the prioritisation in the PICs and the buffers in the
-					sensors, will ensure that the data from the proximity sensor
-					is always received and processed by the CPU to help guide
-					the drone to safety.
-				</p>
-			</section>
-		</div>
+        <p>
+          As a designer of this community protocol it is my hope that the system
+          never have to use to the maximum all the buffers and prioritisation in
+          the PICs with Sensors at the same time but even if that happens, the
+          implementation of the buffers, the prioritisation in the PICs and the
+          buffers in the sensors, will ensure that the data from the proximity
+          sensor is always received and processed by the CPU to help guide the
+          drone to safety.
+        </p>
+      </section>
+    </div>
 
-		<footer id="foot">
-			<p>Made with 💖 by Rasheed Starlet</p>
-		</footer>
-	</body>
+    <footer id="foot">
+      <p>Made with 💖 by Rasheed Starlet</p>
+    </footer>
+  </body>
 </html>

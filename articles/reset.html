@@ -1,132 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title>CPU Resets | Rasheed Starlet</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <title>CPU Resets | Rasheed Starlet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" type="text/css" href="../main/styles.css" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap"
-			rel="stylesheet"
-		/>
-		<script src="main.js"></script>
-	</head>
+    <link rel="stylesheet" type="text/css" href="../main/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Work+Sans:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="main.js"></script>
+  </head>
 
-	<body>
-		<div id="wrapper">
-			<header id="head">
-				<ul>
-					<li><a href="../index.html">Home</a></li>
-					<li><a href="../main/blog.html">Blog</a></li>
-					<li><a href="../main/projects.html">Projects</a></li>
-					<li><a href="../main/languages.html">Languages</a></li>
-				</ul>
-			</header>
+  <body>
+    <div id="wrapper">
+      <header id="head">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../main/blog.html">Blog</a></li>
+          <li><a href="../main/projects.html">Projects</a></li>
+          <li><a href="../main/languages.html">Languages</a></li>
+        </ul>
+      </header>
 
-			<section id="main">
-				<p class="date">10th April, 2023</p>
+      <section id="main">
+        <p class="date">10th April, 2023</p>
 
-				<h1>
-					What it means when a CPU resets itself during a fatal
-					exception.
-				</h1>
+        <h1>
+          What it means when a CPU resets itself during a fatal exception.
+        </h1>
 
-				<h3>What is a Fatal Exception</h3>
+        <h3>What is a Fatal Exception</h3>
 
-				<p>
-					A fatal exception is an exception that the CPU can’t handle
-					which causes the CPU to reset. I have also written about
-					exceptions
-					<a target="_blank" href="interrupts.html">here</a>.
-				</p>
+        <p>
+          A fatal exception is an exception that the CPU can’t handle which
+          causes the CPU to reset. I have also written about exceptions
+          <a target="_blank" href="interrupts.html">here</a>.
+        </p>
 
-				<h3>A Double Fault Exception</h3>
-				<p>
-					When an exception happens the processor is signaled to
-					handle it. Within the time that the processor tries to
-					handle the exception, If another exception happens, it is
-					called a double fault exception. And a double fault
-					exception is raised by the processor.
-				</p>
+        <h3>A Double Fault Exception</h3>
+        <p>
+          When an exception happens the processor is signaled to handle it.
+          Within the time that the processor tries to handle the exception, If
+          another exception happens, it is called a double fault exception. And
+          a double fault exception is raised by the processor.
+        </p>
 
-				<p>
-					If you read the link above you will realize that the way the
-					processor handles exceptions is to call the function that is
-					mapped to the exception raised in the IDT.
-				</p>
+        <p>
+          If you read the link above you will realize that the way the processor
+          handles exceptions is to call the function that is mapped to the
+          exception raised in the IDT.
+        </p>
 
-				<p>
-					What happens if there is no handler? A Triple Fault
-					exception occurs. At this point the processor has had
-					enough. It has no way of handling a Triple Fault so it
-					resets itself. Now that is what we term a fatal exception.
-					An exception that kills. Ha!
-				</p>
+        <p>
+          What happens if there is no handler? A Triple Fault exception occurs.
+          At this point the processor has had enough. It has no way of handling
+          a Triple Fault so it resets itself. Now that is what we term a fatal
+          exception. An exception that kills. Ha!
+        </p>
 
-				<h3>How the processor does a reset</h3>
-				<p>
-					When a reset happens the processor reads and executes
-					instructions from memory. That is it. You want more? Okay.
-				</p>
-				<p>
-					Memory here refers to both RAM and ROM. RAM is the
-					processors workplace. It loads instructions from disk into
-					the RAM and executes them sequentially providing the user
-					with desired outcome of the program.
-				</p>
+        <h3>How the processor does a reset</h3>
+        <p>
+          When a reset happens the processor reads and executes instructions
+          from memory. That is it. You want more? Okay.
+        </p>
+        <p>
+          Memory here refers to both RAM and ROM. RAM is the processors
+          workplace. It loads instructions from disk into the RAM and executes
+          them sequentially providing the user with desired outcome of the
+          program.
+        </p>
 
-				<p>
-					ROM is the non-volatile part of the memory that the
-					processor reads from first when the computer starts. It is
-					hard coded with instructions for
-					<a href="https://en.wikipedia.org/wiki/Power-on_self-test"
-						>Power-On Self-Test(POST)</a
-					>. It contains firmware,
-					<a href="https://en.wikipedia.org/wiki/BIOS">BIOS</a> which
-					usually tells the processor where to load the operating
-					system from.
-				</p>
+        <p>
+          ROM is the non-volatile part of the memory that the processor reads
+          from first when the computer starts. It is hard coded with
+          instructions for
+          <a href="https://en.wikipedia.org/wiki/Power-on_self-test"
+            >Power-On Self-Test(POST)</a
+          >. It contains firmware,
+          <a href="https://en.wikipedia.org/wiki/BIOS">BIOS</a> which usually
+          tells the processor where to load the operating system from.
+        </p>
 
-				<p></p>
+        <p></p>
 
-				<h3>Reset Circuitry</h3>
+        <h3>Reset Circuitry</h3>
 
-				<p>
-					The board has a reset circuitry that is used for resetting
-					the Computer. When a Triple Fault occurs the reset circuitry
-					causes high voltage to pass through the reset pin which is
-					usually set at low voltage. Maintaining the high voltage to
-					the reset pin for some clock cycles causes the processor to
-					reset some major registers.
-				</p>
+        <p>
+          The board has a reset circuitry that is used for resetting the
+          Computer. When a Triple Fault occurs the reset circuitry causes high
+          voltage to pass through the reset pin which is usually set at low
+          voltage. Maintaining the high voltage to the reset pin for some clock
+          cycles causes the processor to reset some major registers.
+        </p>
 
-				<image
-					alt="Rust String Representation"
-					src="../images/registers_reset.png"
-				></image>
+        <image
+          alt="Rust String Representation"
+          src="../images/registers_reset.png"
+        ></image>
 
-				<p>
-					After resetting the registers, the processor uses the CS and
-					IP register to identify the memory address to load and
-					execute. This address usually points to the BIOS.
-				</p>
+        <p>
+          After resetting the registers, the processor uses the CS and IP
+          register to identify the memory address to load and execute. This
+          address usually points to the BIOS.
+        </p>
 
-				<h3>Reset Vector.</h3>
-				<p>
-					Aside from using the CS and IP like we saw above some
-					computers hard code the location of the BIOS into an address
-					in the ROM called the
-					<a href="https://en.wikipedia.org/wiki/Reset_vector"
-						>Reset Vector</a
-					>. On reset, the processor therefore knows exactly where to
-					load the first instruction to execute.
-				</p>
-			</section>
-		</div>
+        <h3>Reset Vector.</h3>
+        <p>
+          Aside from using the CS and IP like we saw above some computers hard
+          code the location of the BIOS into an address in the ROM called the
+          <a href="https://en.wikipedia.org/wiki/Reset_vector">Reset Vector</a>.
+          On reset, the processor therefore knows exactly where to load the
+          first instruction to execute.
+        </p>
+      </section>
+    </div>
 
-		<footer id="foot">
-			<p>Made with 💖 by Rasheed Starlet</p>
-		</footer>
-	</body>
+    <footer id="foot">
+      <p>Made with 💖 by Rasheed Starlet</p>
+    </footer>
+  </body>
 </html>
