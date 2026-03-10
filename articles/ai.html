@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Took My Job</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Literata:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #1a1208;
+      --paper: #f5f0e8;
+      --paper-dark: #ede7d9;
+      --accent: #c0392b;
+      --accent-muted: #e8d5d3;
+      --rule: #c8bfae;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Literata', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .section-rule {
+      border: none;
+      border-top: 1.5px solid var(--rule);
+      margin: 2.5rem 0;
+    }
+
+    .drop-cap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.2rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.75;
+      margin-right: 0.1em;
+      margin-top: 0.12em;
+      color: var(--accent);
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      margin-top: 2.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-heading::before {
+      content: '§';
+      font-style: italic;
+      color: var(--accent);
+      margin-right: 0.45em;
+      font-size: 1.3rem;
+    }
+
+    .header-banner {
+      background-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .header-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 400;
+      border-left: 3px solid var(--accent);
+      padding: 0.5rem 0 0.5rem 1.4rem;
+      margin: 2rem 0;
+      color: #3a2e20;
+      line-height: 1.6;
+    }
+
+    ol {
+      list-style: none;
+      counter-reset: item;
+      padding: 0;
+      margin: 1.2rem 0;
+    }
+
+    ol > li {
+      counter-increment: item;
+      padding-left: 2.2rem;
+      position: relative;
+      margin-bottom: 0.9rem;
+    }
+
+    ol > li::before {
+      content: counter(item) '.';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    ul > li {
+      padding-left: 1.6rem;
+      position: relative;
+      margin-bottom: 0.55rem;
+    }
+
+    ul > li::before {
+      content: '—';
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .sidebar-note {
+      background: var(--paper-dark);
+      border-top: 2px solid var(--ink);
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      font-family: 'IBM Plex Mono', monospace;
+      color: #4a3f2f;
+    }
+
+    .date-stamp {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #8a7a65;
+    }
+
+    p + p {
+      margin-top: 1.1rem;
+    }
+
+    @media (min-width: 768px) {
+      .two-col {
+        column-count: 2;
+        column-gap: 3rem;
+        column-rule: 1px solid var(--rule);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header Banner -->
+  <div class="header-banner px-6 py-10 md:px-16">
+    <div class="max-w-4xl mx-auto">
+      <p class="header-label mb-4">Personal Essay · 2026</p>
+      <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight" style="font-family:'Playfair Display',serif; color: #f5f0e8;">
+        I lost my job to AI: I am sad and I am happy
+      </h1>
+      <p class="mt-4 text-base md:text-lg font-light max-w-xl" style="color:#c8bfae; font-family:'Literata',serif; font-style:italic;">
+        On growing up early, learning everything, getting fired, and why none of it makes me unhappy.
+      </p>
+      <div class="mt-6 date-stamp" style="color:#8a7a65;">
+        Written in 2026 &nbsp;·&nbsp; A long read
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <main class="max-w-3xl mx-auto px-6 md:px-8 py-14">
+
+    <!-- Growing up -->
+    <section>
+      <h2 class="section-heading">Growing up</h2>
+      <p class="drop-cap">When I completed high school, I was 19. in 2017 that was pretty young. I wasn't the youngest in the class but I was amongst the youngest 1% I guess.</p>
+      <p>I can't recall vividly how it happened but I remember been prevented from moving from nursery to primary 1 because I was too young.</p>
+      <p>One day my mum told me that I wasn't up to school going age but they sent me to school because anytime my elder sister was going to school I would be crying to follow and go. Now you see why paragraph 2 above makes sense?</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- Learning -->
+    <section>
+      <h2 class="section-heading">Learning</h2>
+      <p>I have always loved learning. I guess I was born with it. Growing up I have taught myself how to make so many things. self-supervised, self-motivated. Tinkering with electronics, - I was, briefly, a feature phone repairer in primary six - stencil printing, car and trophy making with tin cans, drawing, I guess I didn't have to learn that.</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- Computers -->
+    <section>
+      <h2 class="section-heading">Computers</h2>
+      <p>These screens with black or off-white back coverings and standing mini refrigerators(system units) always captured my attention. I felt at peace with them. Got my dad and later my mum to get my into computer training so I could play with them(more on that here OS link)</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- Discovery computers -->
+    <section>
+      <h2 class="section-heading">Discovery computers</h2>
+      <p>Where I discovered programming and network security and fell in love.</p>
+      <div class="sidebar-note mt-4">
+        I am keeping these short because I have written about these already, you can continue to read further and when you are done, you can go back and read "One does not simply build an OS"
+      </div>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- AI took my job -->
+    <section>
+      <h2 class="section-heading">AI took my job</h2>
+      <p>I had this job where I was working with my employer on a project he was building as a startup. I would labour with hands writing the code because I didn't trust the AI enough and the code was always reviewed before been accepted.</p>
+      <p>The entire stack we were working with was completely new to me, maybe only Javascript which I had studied cover to cover of "The Definitive Guide" in 2019. It was 2025 guess how much of that Javascript I still remember. Needless to say I had to refreshen my javascript.</p>
+      <p>Because you think I am a luddite and deserve AI taking my job, relax not so quick. I didn't use AI mainly because</p>
+
+      <ol>
+        <li>I didn't trust the AI: Why? When coding languages that I was familiar with, I could easily see when the AI did something that I would say naaa! that aint right. So now working with a new stack, if the AI did an oopsie, how would I know? It gets to review and my reviewer/employee catches it, how do I explain?</li>
+        <li>So I didn't use AI so I could actually study and get a deeper understanding of the stack. Before I took on the role, it was agreed that I would be given enough time to ramp up, well that didn't really happen. It was straight to work, so I needed to study the documentation of the entire framework as quickly as possible.</li>
+        <li>AI last year has definitely not as good as this year(2026). There have been major improvements</li>
+        <li>I did actually use AI on the latter part. While working with the code I saw AI comments on major parts on it and I was like, oh, you you are using AI and I am hand writing everything? The speed will definitely not be the same. Pay attention here, this is why people say AI won't take over our jobs as developers. He was more experienced than me so he of course would have more insight into how his code should be following the paradigms of the language and framework and of his style. So if the AI did any nonsense work he was quick to catch and correct. And there was me, less experienced and didn't want to vide code(coding without understanding with the code did) so I was definitely show. 3 things happened before the shift to AI could happen. So the more I get more work, the more there was pressure to deliver quickly and after realising that I was already working with AI code, I guess with was time. So A. There was more pressure, more work that needed to be completed quickly B. I was already working with AI code; I did actually find some things that my reviewer missed in his own AI code that we silently corrected. Goes back to put one of me not trusting AI. C. Remember I said I had to refresh my javascript and read the whole framework's documentation? At this point I think I pretty understand the framework well enough to start building with AI so I could review it before I can approve. So downloaded cursor, prior to that I never didn't even know how cursor worked(LLM Integrated into your codebase, having access(Read+Write) to your entire codebase, I only heard of it but never bothered to check. So yeah, I downloaded cursor and actually went ahead to pay for a subscription for the duration. I was working with him. I could now deliver in time the pressure yet I still had to review every line of code mostly changing about 25-70 percent of the AI code to go by my style and expertise heavily based on the docs. One thing I constantly did was compare the AI code to what is in the framework's documentation. I am big or writing code in how it is expected to be written in the particular language or/and framework i.e idiomatic code.</li>
+      </ol>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- Got fired -->
+    <section>
+      <h2 class="section-heading">Got fired.</h2>
+      <p>Well I still got let go. Let's just say we built to a level where going forward it made sense for my employee to continue working on the code alone with the help of AI. I don't have anything but massive respect for him because at least he gave me bread for a couple of months. Believed in me when I didn't multi-year work experience working for a company. I had mostly worked alone building my own projects. He still remains my friend and hopefully we get to work in the future again.(Actually this nearly happened, it only fell through because i couldn't move to Accra to work in person)</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- Why I am Happy -->
+    <section>
+      <h2 class="section-heading">Why I am Happy</h2>
+      <p>Imagine you go to school and train for a job for 4/6 years to get a certificate with flying colors. May be with first class and one day you wake up and the world has changed. You have been laid off. The only way you know how you live and earn professionally is to be employed with the certificate you acquired yet technology has automated your job out of existence. In the history of the world technology has always made some jobs obsolete. Every few years this is someone's reality.</p>
+      <p>When I decided that I was done with school, my focus was to pursue the things that I am passionately about and that has largely been creative endeavours like visual creativity and computers. Writing software and now breaking software.</p>
+      <p>One thing that gave me confidence was that, The field of computer science was evergreen. There was this video remember fondly because I have watched it several times that talked about the the future demand of software engineers that the world won't be able to fill. AI; Hold my bear! What a future!</p>
+      <p>Well no one can predict the future and the researchers could never predict "Attention is all you need" today the software engineering landscape is completely in shambles. Tech companies firing up to 80%(X, formerly Twitter) and 40%(Block, Jack Dorsey) of all employees.</p>
+      <p>With all these firing a case can be made that the best of engineers will always have I job. To be honest, I don't know. I Like to be optimistic and think that AI won't take our jobs, well how do you explain that to those fired and the company said it was AI? AI has taken their jobs? Hasn't. What about all the graduates with computer science certificates venting their frustrations on reddit <a href="https://www.reddit.com/r/CasualConversation/comments/1iod243/the_decline_of_software_engineering_jobswhats_a/" target="_blank">one</a> <a href="https://www.reddit.com/r/recruitinghell/comments/1rja5xc/software_engineering_is_now_a_closed_caste_if_you/" target="_blank">two</a></p>
+      <p>The other I was telling Dreamer(my friend) that I am pissed about the whole thing. My anger stems from the fact that I believed software engineering was evergreen. Now I can't even tell people to pursue computer science (to become software engineers) when my brother said he wanted to do computer science, I jokingly told him "lol, AI has taken our jobs", wait. lol. I know right. There are so many things person with computer science can do it is not only software engineering. yeah true and I actually believe that with the current landscape in the few years computer science will evolve. I don't know just my believe.</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- I don't even have a certificate -->
+    <section>
+      <h2 class="section-heading">I don't even have a certificate</h2>
+      <p>Over the years I have had countless people telling me to go get a certificate even if I believed I didn't need it, it would be okay to just have it lying down. I think those people missed the forest for the trees. They think the end point justifies the means. I don't think so. I am not in school not because I don't value or want a certificate or I don't want to study. Contrary. I love to study I do study everyday. I strive to achieve sprezzatura in everything that I do. I usually joke that i am not in school, but I study more than the one is school. I have a lot interest. Back in school, for some reasons my classmates called me a polymath, they are right on point. As I write this, if you put me in a job as a painter, interior decorator, artist, graphic designer, video director, video editor, blogger, youtuber, software engineer, devops, security engineer, pen tester, author, I would gladly deliver.</p>
+      <p>If I forced my parents to start school, taught myself almost a gazillion skills what makes you think I shouldn't be the first in class? I never really took school serious, I have also been about pursuing my curiosities. In 2nd year in senior high school, I began to completely hate school. I was tormented. The only thing that prevented me from dropping out was my parents, I thought i had come too far so let me just complete and I did. So you can imagine for the remaining few months I was just passing through the school. I didn't care about, exercises, homeworks, exams, not even mocks. my classmates would remind me how they would be doing dictation and i would be drawing. In a mock exams when was asked to state Newton's 2nd law of motion, I couldn't remember and I replied, I don't remember the 2nd but I remember the 1st and 3rd, next time should I state them? I should have probably state them to show that I was telling the truth but I guess that would have made the joke less fun to retell.</p>
+      <p>Not continuing to the University gave me a lot of time to experiment with my interest. Imagine pushing someone with gazillion interest to go to university and commit to one thing. I am someone that when I have a interest in something and I don't get to do it, It will be eating me up. Even though it was clear that I wanted to do computer science I believed that the best way for me to study that would be self guided and motivated. Immediately I had to sit and class and listen to lecturers, I would have been bored to death and add the fact that other stuff that I was to pursue but couldn't would be eating me up from the inside. I would have been a terrible computer science student and would have probably dropped out.</p>
+      <p>Okay let's say I went to school. Went through all the pain and graduated. Where the f&amp;^k is the job? What would I use the certificate for? I don't know the plight of computer science students in the country I can tell those who want to do software engineering aren't having it any better.</p>
+      <p>I can count the number of my classmates that have proper jobs with one figure. They have spent 4 years, some 6 years, no jobs. My point in a world that is constantly changing it is actually dangerous to dedicate so much time to something that you don't love to do. I have actually written about this which is yet to be published.</p>
+
+      <div class="pull-quote">
+        "Ah chale omo anka nokor3 ankyer3 y3 apuu" — they didn't tell us the truth.
+      </div>
+
+      <p>The other day in my SHS class group on whatsapp, a colleague my friend, was lamenting saying "Ah chale omo anka nokor3 ankyer3 y3 apuu" they didn't tell us the truth. Essentially he is saying that the whole advice of go to school, study well, pass your exams, get a certificate and get a well paying job doesn't really work as powerful as it used to be. Or put it simply, it is no longer the only truth. There are other truths and they didn't tell us those truths.</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- Pursuing Truth -->
+    <section>
+      <h2 class="section-heading">Pursuing Truth</h2>
+      <p>You see when I got frustrated I was naturally seeking how I would make it in life without school. I believe that there must be ways that people like me could strive and live a meaningful life. Vaguely I knew I was interested in entrepreneurship, solving problems and selling solutions. Just when I was playing with this idea in my heard, the universe sent a book. Rich Dad, Poor Dad!</p>
+      <p>I asked ChatGPT for a summary; <a href="https://chatgpt.com/share/69afff25-90fc-8012-99ef-a4150e2db89c" target="_blank">Full Summary Here</a></p>
+      <p>By Robert T. Kiyosaki <em>Rich Dad Poor Dad</em> is a personal finance book that contrasts two different mindsets about money:</p>
+      <ul>
+        <li><strong>Poor Dad</strong> → Kiyosaki's biological father (highly educated, worked for salary).</li>
+        <li><strong>Rich Dad</strong> → His friend's father (entrepreneur who built businesses and invested).</li>
+      </ul>
+      <p>The book argues that <strong>financial success depends more on financial education and mindset than on formal education or a high-paying job.</strong></p>
+      <p>You see, reading Rich Dad, Poor Dad confirmed my ideas. It was an enlightenment. one which you can never go back from.</p>
+      <p>My friend believe in Poor Dad's truth, You see, i can it "truth"? there is not one way of life. I am not saying my "truth" Rich Dad's path is the best so everyone should pursue that. Hell No! I pursued my "truth" and my friend pursued his "truth". I no so many people who pursued Poor Dad's "truth" and are regretting. I am pretty sure that I too, would be regretting now, if I pursued that "truth". But I didn't. Kaisan comment is just one. for illustrative purpose, my interpretation might not even be right but have heard friends directly tell me they have regretted investing so much time in getting their certificates. At least they wish they had spent time seeking and pursuing other truths. I told them not to regret. Now they have their certificates and they can do whatever they want to do with their lives.</p>
+      <p>And I have seen them trying, others are phone repairers, others are photographers and others and reposting iphones for sellers so that can package a commission if they manage to get a phone deal through. I am glad that they understand that there are other truths now.</p>
+    </section>
+
+    <hr class="section-rule"/>
+
+    <!-- There are many truths -->
+    <section>
+      <h2 class="section-heading">There are many "truths"</h2>
+      <p>I hope you don't miss the forest for the trees here. When you are done with this, I hope you leave with an insight that there isn't one truth. There aren't two truths, there are several "truths". Your mission should you choose to accept it, is to find your "truth". Not my "truth" not Rich Dad, Poor Dad's "truth" but your "truth". When you find it I hope you never look back, I hope you pursue it relentlessly with passion, curiosity and endurance.</p>
+      <p>The difference between us is that I spent the pass 8 years of my life pursuing things I was absolutely passionate about. I don't regret even a single day spend on learning about computers, writing code, trading crypto currencies, doing graphic design, been a spoken word artist, trying to make a movie and failed, shooting music videos. All those days have just love. Passion. I have a video of me in a boxer pant and white singlet dancing at early morning around 1AM because after several hours of following the tutorial and failing I finally got the header to work(HTML+CSS) and my life is full of moments like these. I have these moments because I actively sort them and pursue them. And I am happy. I am not saying I have everything that I ever needed or I am the happiest man on earth or my life is full of happiness, No! I am saying that I made decisions that landed me with happiness and love despite all the pain. Most times this happiness is only achieved after pain. Like studying all night and sleeping 2 hours in the morning and feeling like a zoombie. Thing is, I had no one to impress. I have not homework to do, I had no exams or mock coming. I just studied because I was curious and I was passionate to know. That is my truth. They are several times that I sit down and watch the last decade and go like damn! I have done so much within this time frame that if I died today, I would have died a happy man. No Regrets! Zero Regrets!</p>
+      <p>The difference between us is for close to a decade I have spent time building an incredible number of different skills that I can adapt to how ever the job market changes. I don't worry about a gruelling 4 years spent on a computer science certificate that has lost a great deal of potency in getting me a job as a software engineer. What I have are hard earned skills that I am proud of. I enjoy the end today(the skills) but I also absolutely enjoyed the journey of learning through out the years. It was fun. I ain't bored. I ain't pissed, I am glad that I got to do that.</p>
+      <p>So AI took my job, but I am happy. I still write code. With a job or without a job. I still learn and improve my skill as a software engineer. I use the same AI to learn, build and grow better. AI can't take my job when my life is doing what i would be doing in the job anyways and actually enjoying it.</p>
+      <p>For the past year, I have been spending a lot of my time building my skills in application security, hacking on open targets for bug bounties. You see, still growing, still building up more skills, on top of the software engineering experience over the years. Now I can wear event more hats, Security Engineer, Security Researcher, Pentester, Bug Bounty Hunter/Hacker. That's range! I don't understand why I would gave up that for a certificate</p>
+      <p>Will I ever get a job again? Don't know don't really care. Whatever happens in the future I will be there and I would have adapted.</p>
+
+      <div class="pull-quote">
+        What I value most is a life long obsession with learning and building.
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-20 pt-8 border-t-2 border-ink" style="border-color: var(--ink);">
+      <p class="mono text-xs" style="color:#8a7a65; letter-spacing:0.08em;">END OF ESSAY</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
